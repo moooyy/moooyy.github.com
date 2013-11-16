@@ -1,9 +1,33 @@
 <DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <style type="text/css">
+        #bwfstt{
+            background:#666;
+            color: #fcc;
+            margin: 0 auto;
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .5em 2em .55em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em; 
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+    </style>
+</head>
 <body>
 <canvas id="wangfeng" width="400" height="600"></canvas>
-
+<div style="width:400px;text-align:center;margin-top:20px;">
+<a href = "javascript:void(0);" id="bwfstt">我也想帮汪峰上头条</a>
+</div>
 
 <script type="text/javascript">
 var adj = ["孤独的", "自由的", "迷茫的", "坚强的", "绝望的", "青春的", "迷茫的", "光明的", "理想的", "荒谬的"];
@@ -53,6 +77,18 @@ bg.onload = function () {
         context.fillText(geci[i], 20, (20*i + 450));
     }
 }
+</script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1125233886" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    WB2.anyWhere(function(W){
+        W.widget.publish({
+            'id' : 'bwfstt',
+            'default_text': "我在 #帮汪峰上头条工具# 中, 深情创作了这首《"+ title +"》,希望你喜欢, @无名Di叶子, 你也来试试吧~",
+            'callback': function (data) {//发送成功回调
+                // voteAd.getYouhui(voteAd.uid,voteAd.uname);
+            }
+        });
+    });
 </script>
 </body>
 </html>
