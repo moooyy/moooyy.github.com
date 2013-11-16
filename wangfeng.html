@@ -1,0 +1,58 @@
+<DOCTYPE html>
+<html>
+<head></head>
+<body>
+<canvas id="wangfeng" width="400" height="600"></canvas>
+
+
+<script type="text/javascript">
+var adj = ["孤独的", "自由的", "迷茫的", "坚强的", "绝望的", "青春的", "迷茫的", "光明的", "理想的", "荒谬的"];
+var adv = ["依然", "不再", "犹如", "自由地"]
+var noun = ["生命", "路上", "夜里", "天空", "北京", "孩子", "雨水", "石头", "鸟儿", "瞬间", "桥下", "梦想"];
+var verb = ["爱", "前行在", "埋葬", "破碎", "离去", "让", "埋在"];
+var verbi = ["哭泣", "死去", "飞翔", "祈祷", "再见"]
+
+var random = function (min, max) {
+    return Math.floor(min + Math.random() * (max - min + 1));
+}
+
+var aj = function () { return adj[random(0, adj.length-1)]},
+    av = function () { return adv[random(0,adv.length-1)]},
+    n  = function () { return noun[random(0,noun.length-1)]},
+    vi = function () { return verbi[random(0,verbi.length-1)]},
+    vt = function () { return verb[random(0,verb.length-1)]};
+var title = aj() + n();
+var geci = [];
+geci.push(title);
+geci.push(av() + vt() + n());
+geci.push(vt() + n() + " " + av() + vt() + n());
+geci.push(n() + vi());
+geci.push(n() + vi());
+geci.push(vt() + n() + " " + av() + vt() + n());
+// document.body.innerHTML = "<h2>" + title + "</h2>";
+// document.body.innerHTML += geci.join('<br/>');
+// document.body.innerHTML += '<br/><br/>';
+// document.body.innerHTML += geci.join('<br/>');
+var bg = new Image();
+bg.src = ["images/1.jpg","images/2.jpg"][random(0, 1)];
+var context = document.getElementById("wangfeng").getContext("2d");
+bg.onload = function () {
+    context.drawImage(bg,0,0);
+    context.fillStyle = "#fff";
+    context.shadowColor = "RGBA(50,50,50,1)"; 
+    context.shadowOffsetX = 3; 
+    context.shadowOffsetY = 3; 
+    context.shadowBlur = 0;
+    context.font = "bold 20px 微软雅黑";
+    context.textBaseline = "top";
+    context.fillText(title, 20, 320);
+
+    context.font = "normal 16px 微软雅黑";
+    for(var i = 1; i < geci.length; i++) {
+        context.fillText(geci[i], 20, (20*i + 330));
+        context.fillText(geci[i], 20, (20*i + 450));
+    }
+}
+</script>
+</body>
+</html>
