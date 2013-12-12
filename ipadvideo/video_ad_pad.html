@@ -229,7 +229,7 @@ _sinaadsCacheData = {
                     if(src){
                         var pre = document.createElement("iframe");
                         pre.src = src;
-                        document.getElementsByTagName("head")[0].appendChild(pre);
+                        document.body.appendChild(pre);
                     }
                 },
                 initVideoElement: function () { // 初始化视频容器
