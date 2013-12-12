@@ -71,15 +71,15 @@ _sinaadsCacheData = {
                     "http://sax.sina.com.cn/click?type=3&t=MjAxMy0xMS0yOCAxNzo0MToyNQk2MS4xMzUuM…A1ZmE1ZDkJOGIxMTRlZWI5MWNmZGViMAkJNjlkYTNhZTU1ZjUwCUFFCTIyMzE0NDA5NTUJLQkt"
                 ],
                 "link":[],
-                "type":["xml"],
+                "type":["image"],
                 "pv":[""],
                 "pid":null,
                 "src":[
-                    'ipad2.mp4'
+                    'http://i0.sinaimg.cn/fashion/deco/2013/0623/images/555.jpg'
                 ]
             }
         ],
-        "size":"300*150",
+        "size":"300*200",
         "id":"TEST000000000002"
     }
 };
@@ -174,6 +174,7 @@ _sinaadsCacheData = {
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
                     ipad_video_ad.originalVideoElement.controls = false;
+                    ipad_video_ad.originalVideoElement.setAttribute("webkit-playsinline", true);
                     if (ipad_video_ad.headArray[ipad_video_ad.playlist]){
                         ipad_video_ad.countdown(ipad_video_ad.headTime);
                         ipad_video_ad.originalVideoElement.src = ipad_video_ad.headArray[ipad_video_ad.playlist].src[0];
