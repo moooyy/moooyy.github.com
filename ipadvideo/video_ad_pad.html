@@ -87,7 +87,7 @@ _sinaadsCacheData = {
     </head>
     <body>
         <div id="p_player" style="position:relative;width:600px;height:360px;margin:0 auto;">
-            <video id="video" style="background:#000;" src="googleplex.mp4" width="600" height="360" controls>
+            <video id="video" style="background:#000;" src="googleplex.mp4" webkit-playsinline width="600" height="360" controls>
                 <source>无法播放</source>
             </video>
         </div>
@@ -103,7 +103,7 @@ _sinaadsCacheData = {
                 pauseArray: [], // 暂停素材堆栈
                 headconnect: 0, // 加载完成前插片数量, 成功/失败 都记
                 maxhead: 1, // 最大前插片数量
-                headTime: 15, // 前插片播放时长
+                headTime: 3, // 前插片播放时长
                 overtime: 10, //等待超时时长
                 playlist: 0, // 当前播放序列
                 countcomplete: 0, //倒计时结束
@@ -174,7 +174,6 @@ _sinaadsCacheData = {
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
                     ipad_video_ad.originalVideoElement.controls = false;
-                    ipad_video_ad.originalVideoElement.setAttribute("webkit-playsinline", true);
                     if (ipad_video_ad.headArray[ipad_video_ad.playlist]){
                         ipad_video_ad.countdown(ipad_video_ad.headTime);
                         ipad_video_ad.originalVideoElement.src = ipad_video_ad.headArray[ipad_video_ad.playlist].src[0];
@@ -188,10 +187,12 @@ _sinaadsCacheData = {
                 playOriVideo: function () { //播放视频正片
                     ipad_video_ad.playlist = "Original";
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
+                    sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
                     ipad_video_ad.originalVideoElement.controls = true;
                     ipad_video_ad.originalVideoElement.src = ipad_video_ad.originalVideo;
                     ipad_video_ad.originalVideoElement.play();
                     sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
+                    sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
                 },
                 onPlay: function () { // 视频播放事件
                     ipad_video_ad.originalVideoElement.pause();
@@ -207,11 +208,9 @@ _sinaadsCacheData = {
                     };
                 }, 
                 onEnd: function () { // 视频播放结束事件
-                    if(typeof ipad_video_ad.playlist === "number"){ // 前插结束播放下一条前插或正片
-                        ipad_video_ad.playOne();    
-                    }else{ // 正片结束初始化所有值
-                        ipad_video_ad.init();
-                    }
+                    sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
+                    ipad_video_ad.playlist = "End";
+                    ipad_video_ad.init();
                 },
                 onPause: function () { // 视频暂停事件
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
