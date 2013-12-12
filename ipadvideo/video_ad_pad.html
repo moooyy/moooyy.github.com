@@ -91,8 +91,7 @@ _sinaadsCacheData = {
                 <source>无法播放</source>
             </video>
         </div>
-
-
+        <script charset="utf-8" src="sinaads.full.js"></script>
         <script>
             //定义ipad广告初始化方法;
             var ipad_video_ad = {
@@ -217,8 +216,8 @@ _sinaadsCacheData = {
                 },
                 initHead: function () { // 初始化前插片
                     if(ipad_video_ad.headconnect === ipad_video_ad.maxhead){
-                        clearInterval(ipad_video_ad.headcomplete);
                         ipad_video_ad.headsuccess = 1;
+                        clearInterval(ipad_video_ad.headcomplete);
                         sinaadToolkit.array.each(ipad_video_ad.headArray, function(item, i) {
                             // console.log(item.src[0]);
                             ipad_video_ad.preload(item.src[0]);
@@ -236,7 +235,7 @@ _sinaadsCacheData = {
                 initVideoElement: function () { // 初始化视频容器
                     if(document.getElementById(ipad_video_ad.originalVideoId)){
                         clearInterval(ipad_video_ad.domcomplete);
-                        ipad_video_ad.originalVideoElement = sinaadToolkit.dom.get(ipad_video_ad.originalVideoId);
+                        ipad_video_ad.originalVideoElement = document.getElementById(ipad_video_ad.originalVideoId);
                         ipad_video_ad.originalVideo = ipad_video_ad.originalVideoElement.src;
                         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
                         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
@@ -249,59 +248,19 @@ _sinaadsCacheData = {
                     ipad_video_ad.playlist = 0;
                     ipad_video_ad.headcomplete = setInterval(ipad_video_ad.initHead, 50);
                     ipad_video_ad.domcomplete = setInterval(ipad_video_ad.initVideoElement, 50);
-                } 
-            }
-
-            //sinaads解析ipad视频广告的方法注册
-            sinaadsRenderHandler = {
-                'frontfilm' : function (element, w, h, data, config) {
-                    //塞入广告素材;
-                    try{
-                        window.ipad_video_ad.headArray.push(data[0]);
-                    }catch(e){
-                        var ipad_video_ad = {
-                            headArray: []
-                        };
-                        ipad_video_ad.headArray.push(data[0]);
-                    }
-                },
-                'pausefilm' : function (element, w, h, data, config) {
-                        var pauseFilm = null;
-                    // function onPause() { 
-                    //     // if (!video.getAttribute('filmplaying')) {
-                    //     //     //非正片时间暂停;
-                    //     //     return;
-                    //     // }
-                    //     if (video.ended) {
-                    //         //结束前触发的暂停
-                    //         return;
-                    //     }
-                    //     if (data[0].src[0]) {
-                    //         pauseFilm = document.createElement('video');
-                    //         pauseFilm.autoplay = true;
-                    //         pauseFilm.controls = false;
-                    //         pauseFilm.style.cssText = 'position:absolute;width:200px;height:150px;left:150px;top:75px;';
-                    //         pauseFilm.src = data[0].src[0];
-                    //         document.body.appendChild(pauseFilm);
-                    //         sinaadToolkit.event.on(video, 'play', onPlay);
-                    //     }
-                    // }
-                    // function onPlay() {
-                    //     pauseFilm && pauseFilm.pause();
-                    //     pauseFilm && pauseFilm.parentNode.removeChild(pauseFilm);
-                    //     pauseFilm = null;
-                    // }
-                    // if (video) {
-                    //     var adlen = sinaads_video_ipad[i].length,
-                    //         i = 0;
-                    //     sinaadToolkit.event.on(video, 'pause', onPause);
-                    // }
                 }
             };
 
+            //sinaads解析ipad视频广告的方法注册
+            sinaadsRenderHandler.frontfilm = function (element, w, h, data, config) {
+                //塞入广告素材;
+                ipad_video_ad.headArray.push(data[0]);
+            }
+            sinaadsRenderHandler.pausefilm = function (element, w, h, data, config) {
+                var pauseFilm = null;
+            }
             ipad_video_ad.init();
         </script>
-        <script charset="utf-8" src="sinaads.full.js"></script>
 
         <ins class="sinaads" data-ad-pdps="head1"></ins>
         <script>
