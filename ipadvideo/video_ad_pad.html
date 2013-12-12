@@ -91,7 +91,7 @@ _sinaadsCacheData = {
                 <source>无法播放</source>
             </video>
         </div>
-        <script charset="utf-8" src="sinaads.full.js"></script>
+        <script charset="utf-8" src="http://d1.sina.com.cn/litong/zhitou/sinaads/release/sinaads.js"></script>
         <script>
             //定义ipad广告初始化方法;
             var ipad_video_ad = {
@@ -111,20 +111,19 @@ _sinaadsCacheData = {
                 headcomplete: 0, //前插片加载完成
                 isFirstPlay: true, // 是否首次播放标志位
                 waitUntil: function (condition, overtime, succ, fail) { // 等待方法 [条件,超时,成功,失败]
-                    var start = +new Date();
                     ipad_video_ad.showLoading(true);
                     var wait = setInterval(function () {
                         var nowtime = +new Date();
-                        if(condition){
+                        if(eval(condition)){
                             ipad_video_ad.showLoading(false);
-                            try{succ();}catch(e){}
                             clearTimeout(wait);
-                        }else if(nowtime - start >= overtime*1000){
-                            ipad_video_ad.showLoading(false);
-                            try{fail();}catch(e){}
-                            clearTimeout(wait);
+                            try{succ();}catch(e){};
                         }
                     } , 100);
+                    setTimeout(function () {
+                        wait && clearInterval(wait);
+                        try{fail();}catch(e){};
+                    }, overtime*1000)
                 },
                 showLoading: function (y) {
                     if(y){
@@ -150,8 +149,9 @@ _sinaadsCacheData = {
                     count.innerHTML = '点击下方广告 了解更多信息, 广告时间还剩 <span id="countNum">'+ totalTime +'</span> 秒';
                     document.getElementById("countNum").style.cssText = "color:#ee0;";
                     ipad_video_ad.showLoading(true);
-                    sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", function(){ //缓冲完成再开始计时
-                        //alert("canplay");
+                    sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", startCount);
+                    function startCount () { //缓冲完成再开始计时
+                        sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, "canplay", startCount);
                         ipad_video_ad.showLoading(false);
                         ipad_video_ad.countcomplete = setInterval(function () {
                             if(totalTime === 1){
@@ -162,14 +162,14 @@ _sinaadsCacheData = {
                             if(oneTime === 1){
                                 clearInterval(ipad_video_ad.countcomplete);
                                 oneTime = settime;
-                                ipad_video_ad.playOne();
+                                ipad_video_ad.playHead();
                             }else{
                                 oneTime--;
                             }
                         }, 1000);
-                    });
+                    }
                 },
-                playOne: function () { // 播放视频前插
+                playHead: function () { // 播放视频前插
                     ipad_video_ad.originalVideoElement.pause();
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
@@ -177,12 +177,13 @@ _sinaadsCacheData = {
                     if (ipad_video_ad.headArray[ipad_video_ad.playlist]){
                         ipad_video_ad.countdown(ipad_video_ad.headTime);
                         ipad_video_ad.originalVideoElement.src = ipad_video_ad.headArray[ipad_video_ad.playlist].src[0];
-                        ipad_video_ad.originalVideoElement.play();
-                        ipad_video_ad.playlist++;
+                        ipad_video_ad.originalVideoElement.play();   
                     }else{
                         ipad_video_ad.playOriVideo();
                     }
+                    ipad_video_ad.playlist++;
                     ipad_video_ad.isFirstPlay = false;
+
                 },
                 playOriVideo: function () { //播放视频正片
                     ipad_video_ad.playlist = "Original";
@@ -197,7 +198,7 @@ _sinaadsCacheData = {
                 onPlay: function () { // 视频播放事件
                     ipad_video_ad.originalVideoElement.pause();
                     if (ipad_video_ad.isFirstPlay) { // 播放前插
-                        new ipad_video_ad.waitUntil(ipad_video_ad.headsuccess, 10, ipad_video_ad.playOne, ipad_video_ad.playOriVideo);
+                        ipad_video_ad.waitUntil("ipad_video_ad.headconnect === ipad_video_ad.maxhead", 10, ipad_video_ad.playHead, ipad_video_ad.playHead);
                     } else if (ipad_video_ad.playlist === "Pause") { //继续播放
                         alert(ipad_video_ad.playlist);
                         ipad_video_ad.originalVideo.play();
@@ -215,16 +216,6 @@ _sinaadsCacheData = {
                 onPause: function () { // 视频暂停事件
                     sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
                     ipad_video_ad.playlist = "Pause";
-                },
-                initHead: function () { // 初始化前插片
-                    if(ipad_video_ad.headconnect === ipad_video_ad.maxhead){
-                        ipad_video_ad.headsuccess = 1;
-                        clearInterval(ipad_video_ad.headcomplete);
-                        sinaadToolkit.array.each(ipad_video_ad.headArray, function(item, i) {
-                            // console.log(item.src[0]);
-                            // ipad_video_ad.preload(item.src[0]);
-                        })
-                    };
                 },
                 preload: function (src) { // 预加载资源
                     if(src){
@@ -247,19 +238,10 @@ _sinaadsCacheData = {
                 init: function () { //初始化接口
                     ipad_video_ad.isFirstPlay = true;
                     ipad_video_ad.playlist = 0;
-                    ipad_video_ad.headcomplete = setInterval(ipad_video_ad.initHead, 50);
                     ipad_video_ad.domcomplete = setInterval(ipad_video_ad.initVideoElement, 50);
                 }
             };
 
-            //sinaads解析ipad视频广告的方法注册
-            sinaadsRenderHandler.frontfilm = function (element, w, h, data, config) {
-                //塞入广告素材;
-                ipad_video_ad.headArray.push(data[0]);
-            }
-            sinaadsRenderHandler.pausefilm = function (element, w, h, data, config) {
-                var pauseFilm = null;
-            }
             ipad_video_ad.init();
         </script>
 
@@ -268,7 +250,8 @@ _sinaadsCacheData = {
             (sinaads = window.sinaads || []).push({
                 params : {
                     sinaads_video_id : 'video',
-                    sinaads_success_handler: function () {
+                    sinaads_success_handler: function (ins, data) {
+                        ipad_video_ad.headArray[0] = data.content[0];
                         ipad_video_ad.headconnect++;
                     },
                     sinaads_fail_handler: function () {
@@ -277,12 +260,13 @@ _sinaadsCacheData = {
                 }
             });
         </script>
-        <!-- <ins class="sinaads" data-ad-pdps="head2"></ins> -->
+        <ins class="sinaads" data-ad-pdps="head2"></ins>
         <script>
             // (sinaads = window.sinaads || []).push({
             //     params : {
             //         sinaads_video_id : 'video',
-            //         sinaads_success_handler: function () {
+            //         sinaads_success_handler: function (ins, data) {
+            //             ipad_video_ad.headArray[1] = data.content[0];
             //             ipad_video_ad.headconnect++;
             //         },
             //         sinaads_fail_handler: function () {
