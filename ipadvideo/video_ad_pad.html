@@ -227,8 +227,7 @@ _sinaadsCacheData = {
                 },
                 preload: function (src) { // 预加载资源
                     if(src){
-                        var pre = document.createElement("script");
-                        pre.type = "cache/video";
+                        var pre = document.createElement("iframe");
                         pre.src = src;
                         document.getElementsByTagName("head")[0].appendChild(pre);
                     }
