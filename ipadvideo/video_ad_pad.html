@@ -151,6 +151,7 @@ _sinaadsCacheData = {
                     document.getElementById("countNum").style.cssText = "color:#ee0;";
                     ipad_video_ad.showLoading(true);
                     sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", function(){ //缓冲完成再开始计时
+                        alert("canplay");
                         ipad_video_ad.showLoading(false);
                         ipad_video_ad.countcomplete = setInterval(function () {
                             if(totalTime === 1){
