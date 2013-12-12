@@ -116,27 +116,24 @@ _sinaadsCacheData = {
                     var wait = setInterval(function () {
                         var nowtime = +new Date();
                         if(condition){
-                            try{succ();}catch(e){}
                             ipad_video_ad.showLoading(false);
+                            try{succ();}catch(e){}
                             clearTimeout(wait);
                         }else if(nowtime - start >= overtime*1000){
-                            try{fail();}catch(e){}
                             ipad_video_ad.showLoading(false);
+                            try{fail();}catch(e){}
                             clearTimeout(wait);
                         }
                     } , 100);
                 },
                 showLoading: function (y) {
                     if(y){
-                        loading = document.createElement("div");
+                        var loading = document.getElementById("loading") || document.createElement("div");
                         loading.id = "loading"; 
-                        loading.style.cssText = "position:absolute;top:50%;left:50%;width:100px;height:100px;background:url(loading.gif) no-repeat;margin:-50px;display:none;"
+                        loading.style.cssText = "position:absolute;top:50%;left:50%;width:100px;height:100px;background:url(loading.gif) no-repeat;margin:-50px;display:block;"
                         document.getElementById(ipad_video_ad.holderId).appendChild(loading);
-                        setTimeout(function () {
-                            loading.style.display = "";
-                        } ,300)
                     }else{
-                        loading.parentNode.removeChild(loading);
+                        document.getElementById("loading").style.display = "none";
                     }
                 },
                 countdown: function (settime) { // 倒计时
@@ -152,20 +149,24 @@ _sinaadsCacheData = {
                     }
                     count.innerHTML = '点击下方广告 了解更多信息, 广告时间还剩 <span id="countNum">'+ totalTime +'</span> 秒';
                     document.getElementById("countNum").style.cssText = "color:#ee0;";
-                    ipad_video_ad.countcomplete = setInterval(function () {
-                        if(totalTime === 1){
-                            count.parentNode.removeChild(count);
-                        }else{
-                            document.getElementById("countNum").innerHTML = --totalTime;    
-                        }
-                        if(oneTime === 1){
-                            clearInterval(ipad_video_ad.countcomplete);
-                            oneTime = settime;
-                            ipad_video_ad.playOne();
-                        }else{
-                            oneTime--;
-                        }
-                    }, 1000);
+                    ipad_video_ad.showLoading(true);
+                    sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", function(){ //缓冲完成再开始计时
+                        ipad_video_ad.showLoading(false);
+                        ipad_video_ad.countcomplete = setInterval(function () {
+                            if(totalTime === 1){
+                                count.parentNode.removeChild(count);
+                            }else{
+                                document.getElementById("countNum").innerHTML = --totalTime;    
+                            }
+                            if(oneTime === 1){
+                                clearInterval(ipad_video_ad.countcomplete);
+                                oneTime = settime;
+                                ipad_video_ad.playOne();
+                            }else{
+                                oneTime--;
+                            }
+                        }, 1000);
+                    });
                 },
                 playOne: function () { // 播放视频前插
                     ipad_video_ad.originalVideoElement.pause();
