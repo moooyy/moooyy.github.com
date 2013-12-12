@@ -219,7 +219,19 @@ _sinaadsCacheData = {
                     if(ipad_video_ad.headconnect === ipad_video_ad.maxhead){
                         clearInterval(ipad_video_ad.headcomplete);
                         ipad_video_ad.headsuccess = 1;
+                        sinaadToolkit.array.each(ipad_video_ad.headArray, function(item, i) {
+                            // console.log(item.src[0]);
+                            ipad_video_ad.preload(item.src[0]);
+                        })
                     };
+                },
+                preload: function (src) { // 预加载资源
+                    if(src){
+                        var pre = document.createElement("script");
+                        pre.type = "video/catch";
+                        pre.src = src;
+                        document.getElementsByTagName("head")[0].appendChild(pre);
+                    }
                 },
                 initVideoElement: function () { // 初始化视频容器
                     if(sinaadToolkit.dom.get(ipad_video_ad.originalVideoId)){
