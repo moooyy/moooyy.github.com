@@ -234,7 +234,7 @@ _sinaadsCacheData = {
                     }
                 },
                 initVideoElement: function () { // 初始化视频容器
-                    if(sinaadToolkit.dom.get(ipad_video_ad.originalVideoId)){
+                    if(document.getElementById(ipad_video_ad.originalVideoId)){
                         clearInterval(ipad_video_ad.domcomplete);
                         ipad_video_ad.originalVideoElement = sinaadToolkit.dom.get(ipad_video_ad.originalVideoId);
                         ipad_video_ad.originalVideo = ipad_video_ad.originalVideoElement.src;
