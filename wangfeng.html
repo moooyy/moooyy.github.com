@@ -81,6 +81,17 @@ bg.onload = function () {
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1125233886" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     WB2.anyWhere(function(W){
+        W.parseCMD("https://api.weibo.com/2/friendships/friends/bilateral.json", function(sResult, bStatus){
+            if(bStatus == true) {
+                alert(sResult.users[0].name);
+                alert(sResult.users[1].name);
+                alert(sResult.users[2].name);
+            }
+        },{
+            userid : 12345678
+        },{
+            method: 'GET'
+        });
         W.widget.publish({
             'id' : 'bwfstt',
             'default_text': "我在 #帮汪峰上头条工具# 中, 深情创作了这首《"+ title +"》,希望你喜欢, @无名Di叶子, 你也来试试吧~",
