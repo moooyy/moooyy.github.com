@@ -8,13 +8,17 @@ var ipad_video_ad = {
     pauseArray: [], // 暂停素材堆栈
     headconnect: 0, // 加载完成前插片数量, 成功/失败 都记
     maxhead: 1, // 最大前插片数量
-    headTime: 10, // 前插片播放时长
+    headTime: 3, // 前插片播放时长
     overtime: 10, //等待超时时长
     playlist: 0, // 当前播放序列
     countcomplete: 0, //倒计时结束
     domcomplete: 0, //容器加载完成
     headcomplete: 0, //前插片加载完成
     isFirstPlay: true, // 是否首次播放标志位
+    event: {
+        on : function () {},
+        un : function () {}
+    },
     waitUntil: function (condition, overtime, succ, fail) { // 等待方法 [条件,超时,成功,失败]
         ipad_video_ad.showLoading(true);
         var wait = setInterval(function () {
@@ -76,21 +80,19 @@ var ipad_video_ad = {
                 } else {
                     oneTime--;
                 }
-                console.log(totalTime);
-                console.log(oneTime);
             }, 1000);
         }
     },
     playHead: function () { // 播放视频前插
-        ipad_video_ad.originalVideoElement.pause();
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
-        ipad_video_ad.originalVideoElement.controls = false;
         if (ipad_video_ad.headArray[ipad_video_ad.playlist]) {
+            ipad_video_ad.originalVideoElement.pause();
+            ipad_video_ad.originalVideoElement.controls = false;
             ipad_video_ad.countdown(ipad_video_ad.headTime);
             ipad_video_ad.originalVideoElement.src = ipad_video_ad.headArray[ipad_video_ad.playlist].src[0];
             ipad_video_ad.originalVideoElement.play();
-        } else {
+        } else if(ipad_video_ad.playlist != "Original"){
             ipad_video_ad.playOriVideo();
         }
         if (typeof ipad_video_ad.playlist == "number") {
@@ -105,13 +107,15 @@ var ipad_video_ad = {
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
         ipad_video_ad.originalVideoElement.controls = true;
         ipad_video_ad.originalVideoElement.src = ipad_video_ad.originalVideo;
-        ipad_video_ad.originalVideoElement.play();
+        sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", ipad_video_ad.originalVideoElement.play);
         sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
         sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
     },
     showPause: function (data) {
         ipad_video_ad.playlist = "Pause";
+        sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
+        sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, "canplay", ipad_video_ad.originalVideoElement.play);
         if (data) {
             var ad = data.content[0],
                 w = data.size.split("*")[0],
@@ -127,6 +131,8 @@ var ipad_video_ad = {
                 document.getElementById(ipad_video_ad.holderId).appendChild(pause);
             }
         } else {
+            sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
+            sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
             document.getElementById("pause").style.display = "none";
         }
         sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
