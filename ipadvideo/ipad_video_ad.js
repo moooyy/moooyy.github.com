@@ -8,7 +8,7 @@ var ipad_video_ad = {
     pauseArray: [], // 暂停素材堆栈
     headconnect: 0, // 加载完成前插片数量, 成功/失败 都记
     maxhead: 1, // 最大前插片数量
-    headTime: 3, // 前插片播放时长
+    headTime: 10, // 前插片播放时长
     overtime: 10, //等待超时时长
     playlist: 0, // 当前播放序列
     countcomplete: 0, //倒计时结束
