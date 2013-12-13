@@ -76,6 +76,8 @@ var ipad_video_ad = {
                 } else {
                     oneTime--;
                 }
+                console.log(totalTime);
+                console.log(oneTime);
             }, 1000);
         }
     },
@@ -144,6 +146,7 @@ var ipad_video_ad = {
     onEnd: function () { // 视频播放结束事件
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
         ipad_video_ad.playlist = "End";
+        ipad_video_ad.showPause(false);
         ipad_video_ad.init();
     },
     onPause: function () { // 视频暂停事件
