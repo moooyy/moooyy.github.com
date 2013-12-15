@@ -3,6 +3,7 @@ var pmps = {
     totalnum : 0,
     boynum: 0,
     girlnum: 0,
+    focusednum: 0,
     playground: document.getElementById("playground"),
     "people": function () {
         return this.born();
@@ -23,13 +24,27 @@ pmps.people.prototype = {
         newp.id = "pmps" + pmps.totalnum;
         pmps.playground.appendChild(newp);
         pmps.inhouse[newp.id] = {
-            "target" : newp
+            "target" : newp,
+            "self" : this
         }
         this.id = newp.id;
         pmps.totalnum++;
     },
     "setPos": function (x,y) {
         pmps.inhouse[this.id].target.style.cssText += "top:"+ y +"px;left:"+ x +"px;z-index:"+y+";display:block;";
+    },
+    "setFocus": function () {
+        var newf = document.createElement("div");
+        newf.className = "focus";
+        newf.id = "focus" + this.id;
+        newf.innerHTML = "<div class='rotate'></div>";
+        pmps.playground.appendChild(newf);
+        pmps.inhouse[this.id]["focus"] = 1;
+        var left = pmps.inhouse[this.id].target.style.left.split("px")[0];
+        var top = pmps.inhouse[this.id].target.style.top.split("px")[0];
+        newf.style.cssText = "top:"+ top +"px;left:"+ left +"px;z-index:"+(top-1);
+        this.focus = 1;
+        pmps.focusednum++;
     },
     "setSex": function (sex) {
         if(sex){
@@ -49,7 +64,7 @@ pmps.people.prototype = {
         }
     },
     "setBoy": function () {
-        var bglist = ["1.png","3.png","5.png","6.png"];
+        var bglist = ["1.png","3.png","5.png","7.png"];
         pmps.inhouse[this.id].target.style.cssText += "background:url('images/"+ bglist[pmps.rand(0,100)%4] +"') no-repeat;"
     },
     "setGirl": function () {
@@ -59,14 +74,14 @@ pmps.people.prototype = {
 }
 pmps.gather.prototype = {
     "width": 800,
-    "height": 250,
+    "height": 200,
     "setSize" : function (w, h) {
         this.width = w || this.width;
         this.height = h || this.height;
     },
     "add": function () {
         var newpeople = new pmps.people();
-        newpeople.setPos(pmps.rand(0, this.width), pmps.rand(0, this.height));
+        newpeople.setPos(pmps.rand(0, this.width), pmps.rand(30, this.height));
         newpeople.setSex();
     },
     "del" : function () {
@@ -80,8 +95,8 @@ pmps.gather.prototype = {
         for(var i in pmps.inhouse){
             if(pmps.inhouse[i].sex == outsex){
                 pmps.playground.removeChild(pmps.inhouse[i].target);
-                delete pmps.inhouse[i];
                 pmps.totalnum--;
+                delete pmps.inhouse[i];
                 break;
             }
         }
