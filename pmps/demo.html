@@ -16,8 +16,8 @@
         #playground{width:800px;height:200px;margin:258px auto 0;position: relative;}
         .people{width:150px;height:367px;margin:-367px 0 0 -75px;background:#ccc;position:absolute;display:none;-webkit-animation-name:wobble;-webkit-animation-duration:1s;}
 
-        .focus{width:150px;height:150px;position: absolute;margin:-95px 0 0 -75px;-webkit-transform:rotate(32deg) scale(.6)}
-        .rotate{width:150px;height:150px;display:block;background:url('images/focus.png') no-repeat;-webkit-animation-name: rotate;-webkit-animation-duration: 10s;-webkit-animation-iteration-count: infinite;-webkit-animation-timing-function: linear;}
+        .focus{width:150px;height:150px;position: absolute;margin:-95px 0 0 -75px;-webkit-transform:rotate(32deg)}
+        .rotate{width:150px;height:150px;display:block;background:url('images/focus.png') no-repeat;-webkit-animation-name: rotate;-webkit-animation-duration: 1s;-webkit-animation-iteration-count: infinite;-webkit-animation-timing-function: linear;}
 
           @-webkit-keyframes 'wobble' {
              0% {
@@ -37,8 +37,9 @@
           }
 
         @-webkit-keyframes rotate {
-            0% {-webkit-transform:skew(-45deg) rotate(0deg) }
-            100% {-webkit-transform:skew(-45deg) rotate(360deg) }
+            0% {-webkit-transform:skew(-45deg) rotate(0deg) scale(.7)}
+            40% {-webkit-transform:skew(-45deg) rotate(20deg) scale(.6)}
+            100% {-webkit-transform:skew(-45deg) rotate(40deg) scale(.7)}
         }
     </style>
 </head>
@@ -93,7 +94,6 @@
         $( "#radio" ).buttonset();
         var bigarea = new pmps.gather();
         pmps.inhouse.pmps0.self.setFocus();
-        pmps.inhouse.pmps2.self.setFocus()
     });
 
 </script>

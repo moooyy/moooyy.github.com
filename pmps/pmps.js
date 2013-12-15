@@ -20,8 +20,13 @@ pmps.people.prototype = {
     "sex": 1, // 0 : girl , 1 : boy ;
     "born" : function () {
         var newp = document.createElement("div");
+        var This = this;
         newp.className = "people";
         newp.id = "pmps" + pmps.totalnum;
+        newp.onclick = function () {
+            //alert(this.id);
+            This.setFocus();
+        }
         pmps.playground.appendChild(newp);
         pmps.inhouse[newp.id] = {
             "target" : newp,
@@ -34,17 +39,24 @@ pmps.people.prototype = {
         pmps.inhouse[this.id].target.style.cssText += "top:"+ y +"px;left:"+ x +"px;z-index:"+y+";display:block;";
     },
     "setFocus": function () {
-        var newf = document.createElement("div");
-        newf.className = "focus";
-        newf.id = "focus" + this.id;
-        newf.innerHTML = "<div class='rotate'></div>";
-        pmps.playground.appendChild(newf);
-        pmps.inhouse[this.id]["focus"] = 1;
-        var left = pmps.inhouse[this.id].target.style.left.split("px")[0];
-        var top = pmps.inhouse[this.id].target.style.top.split("px")[0];
-        newf.style.cssText = "top:"+ top +"px;left:"+ left +"px;z-index:"+(top-1);
-        this.focus = 1;
-        pmps.focusednum++;
+        if(!this.focus){
+            var newf = document.createElement("div");
+            newf.className = "focus";
+            newf.id = "focus" + this.id;
+            newf.innerHTML = "<div class='rotate'></div>";
+            pmps.playground.appendChild(newf);
+            pmps.inhouse[this.id]["focus"] = newf;
+            var left = pmps.inhouse[this.id].target.style.left.split("px")[0];
+            var top = pmps.inhouse[this.id].target.style.top.split("px")[0];
+            newf.style.cssText = "top:"+ top +"px;left:"+ left +"px;z-index:"+(top-1);
+            this.focus = 1;
+            pmps.focusednum++;
+        }else{
+            pmps.playground.removeChild(pmps.inhouse[this.id]["focus"]);
+            delete pmps.inhouse[this.id]["focus"];
+            pmps.focusednum--;
+            this.focus = 0;
+        }
     },
     "setSex": function (sex) {
         if(sex){
@@ -95,6 +107,9 @@ pmps.gather.prototype = {
         for(var i in pmps.inhouse){
             if(pmps.inhouse[i].sex == outsex){
                 pmps.playground.removeChild(pmps.inhouse[i].target);
+                if(pmps.inhouse[i].focus){
+                    pmps.inhouse[i].self.setFocus();
+                }
                 pmps.totalnum--;
                 delete pmps.inhouse[i];
                 break;
