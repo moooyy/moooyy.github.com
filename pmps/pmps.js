@@ -4,6 +4,7 @@ var pmps = {
     boynum: 0,
     girlnum: 0,
     focusednum: 0,
+    timeout: 0,
     playground: document.getElementById("playground"),
     "people": function () {
         return this.born();

@@ -87,7 +87,8 @@
             step: 1,
             slide: function( event, ui ) {
                 $("#amount").val(ui.value );
-                bigarea.init();
+                clearTimeout(pmps.timeout);
+                pmps.timeout = setTimeout(function () {bigarea.init();},300);
             }
         });
         $("#amount").val($("#slider").slider("value"));
