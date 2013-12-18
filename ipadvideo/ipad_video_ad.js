@@ -117,9 +117,9 @@ var ipad_video_ad = {
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
         sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, "canplay", ipad_video_ad.originalVideoElement.play);
         if (data) {
-            var ad = data.content[0],
-                w = data.size.split("*")[0],
-                h = data.size.split("*")[1];
+            var ad = data,
+                w = data.size[0].split("*")[0],
+                h = data.size[0].split("*")[1];
             if (ad.src[0]) {
                 var pause = document.getElementById("pause") || document.createElement("div");
                 pause.id = "pause";
@@ -165,11 +165,28 @@ var ipad_video_ad = {
             document.body.appendChild(pre);
         }
     },
+    initSource: function () {
+        if(typeof sinaadToolkit !== "undefined"){
+            sinaadToolkit.sio.jsonp("http://123.126.53.109:7011/video/newimpress?pos=ipadlivehead,ipadlivepause&rotate_count=2&media_tags=aaa&timestamp=1223334443335555","ipad_video_ad.initSourcecb");
+        }else{
+            setTimeout(arguments.callee, 1000);
+        }
+    },
+    initSourcecb: function (data) {
+        sinaadToolkit.array.each(data.ad, function (item, i) {
+            if(item.pos === "ipadlivehead"){
+                ipad_video_ad.headArray.push(item.content);
+                ipad_video_ad.headconnect++;
+            }else if(item.pos === "ipadlivepause"){
+                ipad_video_ad.pauseArray.push(item.content);
+            }
+        })
+    },
     initVideoElement: function () { // 初始化视频容器
         if (document.getElementById(ipad_video_ad.originalVideoId)) {
             clearInterval(ipad_video_ad.domcomplete);
             ipad_video_ad.originalVideoElement = document.getElementById(ipad_video_ad.originalVideoId);
-            ipad_video_ad.originalVideo = ipad_video_ad.originalVideoElement.src;
+            ipad_video_ad.originalVideo = document.getElementById("video-hlv").src;
             sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'ended', ipad_video_ad.onEnd);
             sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
             sinaadToolkit.event.un(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
@@ -180,6 +197,7 @@ var ipad_video_ad = {
         ipad_video_ad.isFirstPlay = true;
         ipad_video_ad.playlist = 0;
         ipad_video_ad.domcomplete = setInterval(ipad_video_ad.initVideoElement, 50);
+        ipad_video_ad.initSource();
     }
 };
 
