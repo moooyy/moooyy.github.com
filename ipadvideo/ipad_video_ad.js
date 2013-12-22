@@ -50,6 +50,7 @@ var ipad_video_ad = {
     },
     countdown: function (settime) { // 倒计时
         var count = document.getElementById("countdown"),
+            cover = document.getElementById("coverlink"),
             totalTime = settime * (ipad_video_ad.headArray.length - ipad_video_ad.playlist),
             oneTime = settime;
 
@@ -59,7 +60,19 @@ var ipad_video_ad = {
             count.style.cssText = "position:absolute;top:0;right:0;width:300px;height:25px;font:12px/25px Verdana,'宋体';text-align:center;background:rgba(255,255,255,.4);text-shadow:#333 1px 1px 3px;color:#333;"
             document.getElementById(ipad_video_ad.holderId).appendChild(count);
         }
+        if (!cover){
+            cover = document.createElement("a");
+            cover.id = "coverlink";
+            cover.target = "_blank"
+            if(ipad_video_ad.headArray[0].link[0]){
+                cover.href = ipad_video_ad.headArray[0].link[0];
+            }
+            cover.style.cssText = "position:absolute;top:0;left:0;width:"+ ipad_video_ad.originalVideoElement.offsetWidth +"px;height:"+ ipad_video_ad.originalVideoElement.offsetHeight +"px;"
+            document.getElementById(ipad_video_ad.holderId).appendChild(cover);
+        }
+
         count.innerHTML = '点击下方广告 了解更多信息, 广告时间还剩 <span id="countNum">' + totalTime + '</span> 秒';
+        cover.innerHTML = '<img src="button.png" style="position:absolute;right:40px;bottom:25px;" />'
         document.getElementById("countNum").style.cssText = "color:#ee0;";
         ipad_video_ad.showLoading(true);
         sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, "canplay", startCount);
@@ -70,6 +83,7 @@ var ipad_video_ad = {
             ipad_video_ad.countcomplete = setInterval(function () {
                 if (totalTime === 1) {
                     count.parentNode.removeChild(count);
+                    cover.parentNode.removeChild(cover);
                 } else {
                     document.getElementById("countNum").innerHTML = --totalTime;
                 }
@@ -167,14 +181,14 @@ var ipad_video_ad = {
     },
     initSource: function () {
         if(typeof sinaadToolkit !== "undefined"){
-            sinaadToolkit.sio.jsonp("http://123.126.53.109:7011/video/newimpress?pos=ipadlivehead,ipadlivepause&rotate_count=2&media_tags=aaa&timestamp=1223334443335555","ipad_video_ad.initSourcecb");
+            sinaadToolkit.sio.jsonp("http://123.126.53.109:7011/video/newimpress?pos=ipadlivehead2,ipadlivepause&rotate_count=2&media_tags=aaa&timestamp=1223334443335555","ipad_video_ad.initSourcecb");
         }else{
             setTimeout(arguments.callee, 1000);
         }
     },
     initSourcecb: function (data) {
         sinaadToolkit.array.each(data.ad, function (item, i) {
-            if(item.pos === "ipadlivehead"){
+            if(item.pos.indexOf("ipadlivehead") >= 0){
                 ipad_video_ad.headArray.push(item.content);
                 ipad_video_ad.headconnect++;
             }else if(item.pos === "ipadlivepause"){

@@ -94,21 +94,8 @@ _sinaadsCacheData = {
                 您的浏览器不支持&lt;Video&gt;标签 
             </video>
         </div>
-        <ins class="sinaads" data-ad-pdps="livehead"></ins>
-        <script>
-            (sinaads = window.sinaads || []).push({
-                params : {
-                    sinaads_video_id : 'video',
-                    sinaads_success_handler: function (ins, data) {
-                        ipad_video_ad.headArray[0] = data.content[0];
-                        ipad_video_ad.headconnect++;
-                    },
-                    sinaads_fail_handler: function () {
-                        ipad_video_ad.headconnect++;
-                    }
-                }
-            });
-        </script>
+        <ins class="sinaads" data-ad-pdps="ipadlivehead"></ins>
+        
         <!-- <ins class="sinaads" data-ad-pdps="head2"></ins> -->
         <script>
             // (sinaads = window.sinaads || []).push({
@@ -140,16 +127,6 @@ _sinaadsCacheData = {
         </script>
         
         <ins class="sinaads" data-ad-pdps="TEST000000000002"></ins>
-        <script>
-            (sinaads = window.sinaads || []).push({
-                params : {
-                    sinaads_video_id : 'video',
-                    sinaads_success_handler: function (ins, data) {
-                        ipad_video_ad.pauseArray[0] = data;
-                    },
-                }
-            });
-        </script>
 
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
