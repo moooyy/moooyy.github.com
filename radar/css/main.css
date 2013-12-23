@@ -60,15 +60,15 @@
     100% {-webkit-transform: rotate(360deg)}
 }
 .circle_weibo .circle{
-    -webkit-animation-duration: 4s;
+    -webkit-animation-duration: 10s;
     -webkit-animation-name: rotate_weibo;
 }
 @-webkit-keyframes rotate_weibo {
-    0% {-webkit-transform: rotate(0deg)}
-    100% {-webkit-transform: rotate(360deg)}
+    0% {-webkit-transform: scaleX(-1) rotate(0deg)}
+    100% {-webkit-transform: scaleX(-1) rotate(360deg)}
 }
 .circle_sina .circle{
-    -webkit-animation-duration: 8s;
+    -webkit-animation-duration: 5s;
     -webkit-animation-name: rotate_sina;
 }
 @-webkit-keyframes rotate_sina {
@@ -76,7 +76,7 @@
     100% {-webkit-transform: scale(.8) rotate(360deg)}
 }
 .circle_video .circle{
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 4s;
     -webkit-animation-name: rotate_video;
 }
 @-webkit-keyframes rotate_video {
@@ -84,11 +84,12 @@
     100% {-webkit-transform:scale(.7) rotate(360deg)}
 }
 .circle_mobile .circle{
+    -webkit-animation-duration: 2s;
     -webkit-animation-name: rotate_mobile;
 }
 @-webkit-keyframes rotate_mobile {
-    0% {-webkit-transform:scale(.5) rotate(0deg)}
-    100% {-webkit-transform:scale(.5) rotate(360deg)}
+    0% {-webkit-transform:scaleX(-1) scale(.5) rotate(0deg)}
+    100% {-webkit-transform:scaleX(-1) scale(.5) rotate(360deg)}
 }
 
 .flow_weibo{
