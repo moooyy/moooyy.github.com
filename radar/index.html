@@ -35,8 +35,8 @@
                 <div class="flow"></div>
             </div>
             <div class="dragonball">
-                <div class="dragon">
-                    <div class="dragoneye"></div>
+                <div class="dragon" id="dragon">
+                    <div id="dragoneye" class=""></div>
                 </div>
             </div>
             <div class="dragon_c"></div>
@@ -80,5 +80,14 @@
                 </div>
             </div>
         </div>
+        <script>
+            document.getElementById("dragon").onclick = blink;
+            function blink () {
+                document.getElementById("dragoneye").className = "dragoneye";
+                setTimeout(function () {
+                    document.getElementById("dragoneye").className = "";
+                }, 600)
+            }
+        </script>
     </body>
 </html>
