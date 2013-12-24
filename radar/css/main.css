@@ -3,6 +3,7 @@
     height: 600px;
     position: relative;
     background: url(images/bg.jpg) repeat;
+    overflow: hidden;
 }
 .rotate_holder{
     width:160px;
@@ -11,37 +12,79 @@
     z-index: 10;
 }
 .circle_weibo{
-    left: 240px;
+    left: 135px;
     top: 152px;
 }
 .circle_sina{
-    left: 80px;
-    top: 260px;
+    left: 0px;
+    top: 300px;
 }
 .circle_video{
-    left: 100px;
+    left: 20px;
     top: 30px;
 }
 .circle_mobile{
-    left: 260px;
-    top: 340px;
+    left: 160px;
+    top: 360px;
 }
 .dragon{
     width: 307px;
     height: 353px;
     position: absolute;
     z-index: 30;
-    left: 640px;
-    top: 150px;
+    left: 350px;
+    top: 80px;
     background: url(images/dragon.png) no-repeat;
 }
-
+.wave{
+    position: absolute;
+    left: 670px;
+    top: 260px;
+}
+.wave div{
+    width: 60px;
+    height: 102px;
+    opacity: .2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation-name: hideshow;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.wave1{
+    background: url(images/wave1.png) no-repeat;
+}
+.wave2{
+    -webkit-animation-delay: .5s;
+    background: url(images/wave2.png) no-repeat;
+}
+.wave3{
+    -webkit-animation-delay: 1s;
+    background: url(images/wave3.png) no-repeat;
+}
 
 /*位移运动 begin*/
 .circle_weibo{
 
 }
 /*位移运动 end*/
+
+/*渐隐渐显 begin*/
+@-webkit-keyframes hideshow {
+    0% {opacity: .2;}
+    25% {opacity: 1;}
+    100% {opacity: .2;}
+}
+@-webkit-keyframes peopleshow {
+    0% {opacity: .1;}
+    10% {opacity: 1;}
+    50% {opacity: 1;}
+    60% {opacity: .1;}
+    100% {opacity: .1;}
+}
+/*渐隐渐显 end*/
 
 /*圆周运动 begin*/
 .circle{
@@ -93,18 +136,19 @@
 }
 
 .flow_weibo{
-    width: 460px;
+    width: 260px;
     height: 130px;
     overflow:hidden;
     position: absolute;
-    left: 260px;
-    top: 152px;
+    left: 180px;
+    top: 218px;
 }
 .flow{
     width: 1400px;
     height: 1400px;
     left: -560px;
     top: -10px;
+    zoom: .5;
     position: absolute;
     z-index: 1;
     background: url(images/flow.png) 50% 50% no-repeat;
@@ -119,12 +163,12 @@
     100% {-webkit-transform: rotate(420deg)}
 }
 .flow_sina{
-    width: 650px;
-    height: 180px;
+    width: 400px;
+    height: 140px;
     overflow:hidden;
     position: absolute;
-    left: 120px;
-    top: 300px;
+    left: 40px;
+    top: 360px;
 }
 .flow_sina .flow{
     left: -240px;
@@ -139,12 +183,12 @@
 }
 
 .flow_video{
-    width: 600px;
+    width: 440px;
     height: 280px;
     overflow:hidden;
     position: absolute;
-    left: 200px;
-    top: 62px;
+    left: 120px;
+    top: 72px;
 }
 .flow_video .flow{
     width: 1400px;
@@ -164,6 +208,35 @@
     0% {-webkit-transform:rotate(60deg)}
     25% {-webkit-transform:rotate(60deg)}
     100% {-webkit-transform:rotate(420deg)}
+}
+.d3parent{
+    width:1400px;
+    height:1400px;
+    position: absolute;
+    z-index: 100;
+    top: -340px;
+    left: -200px;
+    -webkit-animation-name: rotate3d;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes rotate3d {
+    0% {-webkit-transform:skew(45deg) rotate(0deg) scale(.4);opacity:.6}
+    25% {-webkit-transform:skew(90deg) rotate(180deg) scale(.4);opacity:0}
+    50% {-webkit-transform:skew(135deg) rotate(360deg) scale(.6);opacity:.8}
+    75% {-webkit-transform:skew(90deg) rotate(540deg) scale(.4);opacity:0}
+    100% {-webkit-transform:skew(45deg) rotate(720deg) scale(.4);opacity:.6}
+}
+.d3{
+    width:1400px;
+    height:1400px;
+    position: absolute;
+    z-index: 100;
+    background: url(images/flow.png) no-repeat;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 }
 /*圆周运动 end*/
 
@@ -187,4 +260,142 @@
 }
 .mobile_bg{
     background: url(images/ico_mobile.jpg) 50% 50% no-repeat;
+}
+.lotpeople{
+    width: 320px;
+    height: 490px;
+    position: absolute;
+    top: 50px;
+    left: 670px;
+}
+.woman{
+    position: absolute;
+    width: 38px;
+    height: 90px;
+    background: url(images/woman.png) no-repeat;
+}
+.man{
+    position: absolute;
+    width: 38px;
+    height: 90px;
+    background: url(images/man.png) no-repeat;
+}
+.child{
+    position: absolute;
+    width: 38px;
+    height: 90px;
+    background: url(images/child.png) no-repeat;
+}
+.distance1x{
+    left: 38px;
+}
+.distance2x{
+    left: 30px;
+}
+.distance3x{
+    left: 58px;
+}
+.peoplefocus1{
+    width: 76px;
+    height: 90px;
+    position: absolute;
+    left: 20px;
+    top:30px;
+    opacity: .1;
+    -webkit-animation-delay: 0;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus2{
+    width: 38px;
+    height: 90px;
+    position: absolute;
+    left: 150px;
+    top: 60px;
+    opacity: .1;
+    -webkit-animation-delay: 5s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus3{
+    width: 38px;
+    height: 90px;
+    position: absolute;
+    left: 260px;
+    top: 90px;
+    opacity: .1;
+    -webkit-animation-delay: 10s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus4{
+    width: 38px;
+    height: 90px;
+    position: absolute;
+    left: 80px;
+    top: 220px;
+    opacity: .1;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus5{
+    width: 114px;
+    height: 90px;
+    position: absolute;
+    left: 160px;
+    top: 197px;
+    opacity: .1;
+    -webkit-animation-delay: 8s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus6{
+    width: 38px;
+    height: 90px;
+    position: absolute;
+    left: 20px;
+    top: 380px;
+    opacity: .1;
+    -webkit-animation-delay: 1s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus7{
+    width: 76px;
+    height: 90px;
+    position: absolute;
+    left: 140px;
+    top: 320px;
+    opacity: .1;
+    -webkit-animation-delay: 10s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.peoplefocus8{
+    width: 76px;
+    height: 90px;
+    position: absolute;
+    left: 260px;
+    top: 340px;
+    opacity: .1;
+    -webkit-animation-delay: 5s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
 }
