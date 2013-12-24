@@ -144,11 +144,10 @@
     top: 218px;
 }
 .flow{
-    width: 1400px;
-    height: 1400px;
-    left: -560px;
-    top: -10px;
-    zoom: .5;
+    width: 700px;
+    height: 700px;
+    left: -280px;
+    top: -5px;
     position: absolute;
     z-index: 1;
     background: url(images/flow.png) 50% 50% no-repeat;
@@ -171,8 +170,8 @@
     top: 360px;
 }
 .flow_sina .flow{
-    left: -240px;
-    top: -1185px;
+    left: -120px;
+    top: -592px;
     -webkit-animation-name: rotate_flow_sina;
     -webkit-animation-duration: 3s;
 }
@@ -191,9 +190,7 @@
     top: 72px;
 }
 .flow_video .flow{
-    width: 1400px;
-    height: 1400px;
-    left: -700px;
+    left: -350px;
     top: 0px;
     position: absolute;
     z-index: 1;
@@ -210,12 +207,12 @@
     100% {-webkit-transform:rotate(420deg)}
 }
 .d3parent{
-    width:1400px;
-    height:1400px;
+    width:700px;
+    height:700px;
     position: absolute;
     z-index: 100;
-    top: -340px;
-    left: -200px;
+    top: -170px;
+    left: -100px;
     -webkit-animation-name: rotate3d;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
@@ -228,10 +225,11 @@
     100% {-webkit-transform:skew(45deg) rotate(720deg) scale(.4);opacity:.6}
 }
 .d3{
-    width:1400px;
-    height:1400px;
+    width:700px;
+    height:700px;
     position: absolute;
     z-index: 100;
+    zoom: 2;
     background: url(images/flow.png) no-repeat;
     -webkit-animation-name: rotate;
     -webkit-animation-duration: 5s;
