@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/**
+ * 生成一个递增的圆环
+ * @author acelan(xiaobin8[at]staff.sina.com.cn)
+ */
+/* 环直径 */
+/* 环粗细 */
+/* 环颜色 */
+/* 环的class */
+/* 环转动动画时长 */
+/* 旋转方法 */
+@-webkit-keyframes ringProgressRotate {
+  0% {
+    -webkit-transform: rotate(0deg); }
+
+  25% {
+    -webkit-transform: rotate(180deg); }
+
+  50% {
+    -webkit-transform: rotate(180deg); }
+
+  75% {
+    -webkit-transform: rotate(360deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+.ring-progress150px {
+  border-radius: 999px;
+  width: 150px;
+  height: 150px;
+  position: absolute; }
+
+.ring-progress150px .left {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  clip: rect(0, 75px, 150px, 0); }
+
+.ring-progress150px .left:before {
+  width: 130px;
+  height: 130px;
+  position: absolute;
+  border-radius: 999px;
+  border: 10px solid #fcbf38;
+  clip: rect(0, 75px, 150px, 0); }
+
+.ring-progress150px .right,
+.ring-progress150px .right:before {
+  width: 130px;
+  height: 130px;
+  position: absolute;
+  border-radius: 999px;
+  clip: rect(0, 150px, 150px, 75px); }
+
+.ring-progress150px .left:before,
+.ring-progress150px .right:before {
+  content: ' ';
+  border: 10px solid #fcbf38; }
+
+.ring-progress150px .left:before {
+  border-color: #fcbf38;
+  -webkit-animation-name: ringProgressRotate;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 2.5s; }
+
+.ring-progress150px .right:before {
+  border-color: #fcbf38;
+  -webkit-animation-name: ringProgressRotate;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear; }

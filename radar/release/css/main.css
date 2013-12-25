@@ -1,9 +1,76 @@
+html,body,div,ul,li{margin:0;padding:0;}
+ul,li{list-style: none;}
+.header_bg{
+    width: 100%;
+    height: 70px;
+    border-bottom: 2px solid #fad88b;
+}
+.header{
+    margin: 0 auto;
+    width: 1000px;
+    height: 70px;
+    position: relative;
+}
+.logo{
+    width: 287px;
+    height: 47px;
+    overflow: hidden;
+    position: absolute;
+    top: 12px;
+    left: 0;
+}
+.topmenu{
+    width:300px;
+    height:70px;
+    position: absolute;
+    left: 400px;
+    top: 0;
+}
+.topmenu a:link,.topmenu a:visited{
+    color:#333;
+    text-decoration: none;
+}
+.topmenu li{
+    float: left;
+    margin: 0 0 0 35px;
+    padding: 0 25px;
+    font:600 18px/70px Verdana,"微软雅黑","宋体";
+}
+.topmenu li.selected{
+    background: url(images/bg-x.png) repeat-x;
+}
+.topmenu li.selected a:link,.topmenu li.selected a:visited{
+    color: #fff;
+}
+
+.slogon{
+    width: 848px;
+    height: 48px;
+    position: absolute;
+    top: 50px;
+    left: 80px;
+    text-indent: -10000px;
+    overflow: hidden;
+    background: url(images/slogon.png) no-repeat;
+}
+
+.playgroundbg{
+    width: 100%;
+    height: 650px;
+    background: url(images/bg.jpg) repeat;
+}
 .playground{
     width: 1000px;
-    height: 600px;
+    height: 650px;
+    margin: 0 auto;
     position: relative;
-    background: url(images/bg.jpg) repeat;
     overflow: hidden;
+}
+.resource{
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 100px;
 }
 .rotate_holder{
     width:160px;
@@ -33,7 +100,7 @@
     position: absolute;
     z-index: 30;
     left: 355px;
-    top: 175px;
+    top: 275px;
     background: url(images/dragonball.png) no-repeat;
     -webkit-animation-name: dragonball;
     -webkit-animation-duration: 2s;
@@ -44,7 +111,7 @@
     position: absolute;
     z-index: 30;
     left: 355px;
-    top: 175px;
+    top: 275px;
     background: url(images/dragon_c.png) no-repeat;
     -webkit-animation-name: dragon_c;
     -webkit-animation-iteration-count: 1;
@@ -89,7 +156,7 @@
 .wave{
     position: absolute;
     left: 670px;
-    top: 260px;
+    top: 360px;
 }
 .wave div{
     width: 60px;
@@ -176,7 +243,7 @@
     100% {-webkit-transform: scaleY(0);}
 }
 .circle_weibo .circle{
-    -webkit-animation-duration: 10s;
+    -webkit-animation-duration: 20s;
     -webkit-animation-name: rotate_weibo;
 }
 @-webkit-keyframes rotate_weibo {
@@ -184,7 +251,7 @@
     100% {-webkit-transform: scaleX(-1) rotate(360deg)}
 }
 .circle_sina .circle{
-    -webkit-animation-duration: 5s;
+    -webkit-animation-duration: 10s;
     -webkit-animation-name: rotate_sina;
 }
 @-webkit-keyframes rotate_sina {
@@ -192,7 +259,7 @@
     100% {-webkit-transform: scale(.8) rotate(360deg)}
 }
 .circle_video .circle{
-    -webkit-animation-duration: 4s;
+    -webkit-animation-duration: 8s;
     -webkit-animation-name: rotate_video;
 }
 @-webkit-keyframes rotate_video {
@@ -200,7 +267,7 @@
     100% {-webkit-transform:scale(.7) rotate(360deg)}
 }
 .circle_mobile .circle{
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 4s;
     -webkit-animation-name: rotate_mobile;
 }
 @-webkit-keyframes rotate_mobile {
@@ -336,7 +403,7 @@
     width: 320px;
     height: 490px;
     position: absolute;
-    top: 50px;
+    top: 150px;
     left: 670px;
 }
 .woman{
@@ -469,4 +536,62 @@
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+}
+.circlefocus1{
+    position: absolute;
+    top: 10px;
+    left: -12px;
+    width: 150px;
+    height: 150px;
+    zoom: .9;
+    opacity: .1;
+    -webkit-animation-delay: 0;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.circlefocus2{
+    position: absolute;
+    top: 168px;
+    left: 132px;
+    width: 150px;
+    height: 150px;
+    opacity: .1;
+    -webkit-animation-delay: 8s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.circlefocus3{
+    position: absolute;
+    top: 457px;
+    left: 167px;
+    width: 150px;
+    height: 150px;
+    zoom: .7;
+    opacity: .1;
+    -webkit-animation-delay: 10s;
+    -webkit-animation-name: peopleshow;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+.circleborder{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 130px;
+    height: 130px;
+    border: 10px solid #ccc;
+    border-radius: 50%;
+}
+.todo{
+    width: 1000px;
+    height: 620px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: url(images/todo.png) center 30px no-repeat;
 }
