@@ -747,9 +747,22 @@ ul,li{list-style: none;}
     z-index:3;
 }
 .intro2:hover .intro2_money{
-    -webkit-animation-name: scaleX;
-    -webkit-animation-duration: .5s;
+    -webkit-animation-name: heartbeat;
+    -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes heartbeat {
+    0% {-webkit-transform: scale(1);}
+    15% {-webkit-transform: scale(.8);}
+    20% {-webkit-transform: scale(1.2);}
+    30% {-webkit-transform: scale(.9);}
+    40% {-webkit-transform: scale(1.1);}
+    50% {-webkit-transform: scale(1);}
+    60% {-webkit-transform: scale(.8);}
+    70% {-webkit-transform: scale(1.2);}
+    80% {-webkit-transform: scale(.9);}
+    90% {-webkit-transform: scale(1.1);}
+    100% {-webkit-transform: scale(1);}
 }
 .intro2:hover .intro2_arrow{
     -webkit-animation-name: dropdown;
