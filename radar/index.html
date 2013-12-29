@@ -2,8 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="./release/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="./release/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="./release/css/retina.css"/> 
         <link href="./release/css/ring-progress-border.css" type="text/css" rel="stylesheet" />
+        <link href="./release/css/cupertino/jquery-ui-1.10.3.custom.min.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="./release/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="./release/js/io.js"></script>
+        <script type="text/javascript" src="./release/js/jquery-ui-1.10.3.custom.min.js"></script>
     </head>
     <body>
         <div class="header_bg">
@@ -153,7 +158,13 @@
                 </div>
             </div>
         </div>
+        <div id="alert" title="系统提示" style="display:none;">
+            <p>test</p>
+        </div>
         <script>
+            if(window.devicePixelRatio === 2){
+                document.body.className = "retina";
+            }
             document.getElementById("dragon").onclick = blink;
             function blink () {
                 document.getElementById("dragoneye").className = "dragoneye";

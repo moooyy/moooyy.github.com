@@ -419,16 +419,16 @@ ul,li{list-style: none;}
     height: 100%;
 }
 .weibo_bg{
-    background: url(images/ico_weibo.jpg) 50% 50% no-repeat;
+    background: url(images/ico_weibo.png) 50% 50% no-repeat;
 }
 .sina_bg{
-    background: url(images/ico_sina.jpg) 50% 50% no-repeat;
+    background: url(images/ico_sina.png) 50% 50% no-repeat;
 }
 .video_bg{
-    background: url(images/ico_video.jpg) 50% 50% no-repeat;
+    background: url(images/ico_video.png) 50% 50% no-repeat;
 }
 .mobile_bg{
-    background: url(images/ico_mobile.jpg) 50% 50% no-repeat;
+    background: url(images/ico_mobile.png) 50% 50% no-repeat;
 }
 .lotpeople{
     width: 320px;
@@ -846,4 +846,14 @@ ul,li{list-style: none;}
     -webkit-animation-name: rotategear2;
     -webkit-animation-duration: 10s;
     -webkit-animation-iteration-count: infinite;
+}
+
+
+
+/*视网膜屏优化*/
+.retina .topmenu li.selected{
+    background: url(images/bg-x.png) repeat-x;
+}
+.retina .dragon{
+    background: url(images/dragon.png) no-repeat;
 }

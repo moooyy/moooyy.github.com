@@ -1,0 +1,57 @@
+/*视网膜屏优化*/
+body{
+}
+.topmenu li.selected{
+    background: url(images/bg-x.png) repeat-x;
+}
+.retina .dragon{
+    width: 580px;
+    height: 636px;
+    background: url(images2x/dragon@2x.png) no-repeat;
+    left: 16px;
+    top: -186px;
+}
+.retina .dragonball{
+    width: 512px;
+    height: 512px;
+    position: absolute;
+    z-index: 30;
+    left: 710px;
+    top: 550px;
+    background: url(images2x/dragonball@2x.png) no-repeat;
+    zoom: .5;
+}
+.retina .dragon_c{
+    width: 512px;
+    height: 512px;
+    position: absolute;
+    z-index: 30;
+    left: 710px;
+    top: 550px;
+    background: url(images2x/dragon_c@2x.png) no-repeat;
+    zoom: .5;
+}
+.retina .circle{
+    position: absolute;
+    z-index: 20;
+    width: 320px;
+    height: 320px;
+    background: url(images2x/circle@2x.png) no-repeat;
+    zoom: .5;
+}
+.retina .weibo_bg{
+    background: url(images2x/ico_weibo@2x.png) 50% 50% no-repeat;
+    zoom: .5;
+}
+.retina .sina_bg{
+    background: url(images2x/ico_sina@2x.png) 50% 50% no-repeat;
+    zoom: .5;
+}
+.retina .video_bg{
+    background: url(images2x/ico_video@2x.png) 50% 50% no-repeat;
+    zoom: .5;
+}
+.retina .mobile_bg{
+    background: url(images2x/ico_mobile@2x.png) 50% 50% no-repeat;
+    zoom: .5;
+}
