@@ -10,24 +10,31 @@ body{
     background: url(images2x/dragon@2x.png) no-repeat;
     left: 16px;
     top: -186px;
+    zoom: .5;
 }
 .retina .dragonball{
     width: 512px;
     height: 512px;
     position: absolute;
     z-index: 30;
-    left: 710px;
-    top: 550px;
     background: url(images2x/dragonball@2x.png) no-repeat;
     zoom: .5;
+}
+.retina .dragonhighlight{
+    width: 512px;
+    height: 512px;
+    position: absolute;
+    z-index: 35;
+    background: url(images2x/highlight@2x.png) no-repeat;
+    zoom: .5
 }
 .retina .dragon_c{
     width: 512px;
     height: 512px;
     position: absolute;
     z-index: 30;
-    left: 710px;
-    top: 550px;
+    left: 6px;
+    top: 20px;
     background: url(images2x/dragon_c@2x.png) no-repeat;
     zoom: .5;
 }
@@ -54,4 +61,18 @@ body{
 .retina .mobile_bg{
     background: url(images2x/ico_mobile@2x.png) 50% 50% no-repeat;
     zoom: .5;
+}
+.retina .dragoneye{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border:1px solid #fbb43d;
+    position: absolute;
+    left: 112px;
+    top: 36px;
+    background: #fff;
+    -webkit-transform: scaleY(0);
+    -webkit-animation-name: dragoneye;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: .2s;
 }

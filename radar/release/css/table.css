@@ -1,0 +1,72 @@
+tr:nth-child(even){
+    background-color:#f9f9f9;
+}
+table{
+    border: 1px solid rgb(245,172,33);
+    border-radius: 4px;
+    border-collapse: separate;
+    border-spacing: 0px;
+    text-align: center;
+    background-color: white;
+}
+ 
+table> tr > th, table > * > tr > th{
+    font-weight: normal;
+    height: 42px;
+    background-color: rgb(245,172,33);
+    color: white;
+}
+table > tr > td, table > * > tr > td{
+    height: 21px;
+    border: none;
+    padding: 6px 0px;
+    border-top: 1px solid #ddd;
+    color: rgb(181,181,181);
+}
+#subTable th{
+    height: 40px;
+}
+table {
+  font-size: 14px;
+}
+.diffArea {
+    border:1px solid #ddd;
+    position:relative;
+    padding: 24px;
+    height: 360px
+}
+
+#left {
+    position: absolute;
+}
+
+#right {
+    position: absolute;
+    right: 0px;
+}
+
+#radarContent {
+    position: absolute;
+    margin-left: -150px;
+    left: 50%;
+}
+
+#tips {
+    position: absolute;
+    top: 340px;
+    width: 948px;
+    text-align: center;
+}
+.tipContent {
+    padding: 6px 12px;
+    background-color: rgb(239,247,231)
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.line{
+    transition-duration: 2s;
+}

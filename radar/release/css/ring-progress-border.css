@@ -29,7 +29,9 @@
   border-radius: 999px;
   width: 150px;
   height: 150px;
-  position: absolute; }
+  position: absolute;
+  z-index: 1;
+}
 
 .ring-progress150px .left {
   width: 150px;
