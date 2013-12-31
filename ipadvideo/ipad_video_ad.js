@@ -147,7 +147,9 @@ var ipad_video_ad = {
         } else {
             sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'pause', ipad_video_ad.onPause);
             sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
-            document.getElementById("pause").style.display = "none";
+            if(document.getElementById("pause")){
+                document.getElementById("pause").style.display = "none";
+            }
         }
         sinaadToolkit.event.on(ipad_video_ad.originalVideoElement, 'play', ipad_video_ad.onPlay);
     },

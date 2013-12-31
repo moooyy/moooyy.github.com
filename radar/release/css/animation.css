@@ -113,6 +113,15 @@
     100% {opacity: 1;-webkit-transform:scale(1);}
 }
 
+@-webkit-keyframes entertrans {
+    0% {opacity: .3;-webkit-transform:scale(.1);}
+    40% {opacity: .1;-webkit-transform:scale(1.2);}
+    70% {opacity: .5;-webkit-transform:scale(.9);}
+    85% {opacity: .1;-webkit-transform:scale(1.1);}
+    90% {opacity: .3;-webkit-transform:scale(.95);}
+    100% {opacity: .3;-webkit-transform:scale(1);}
+}
+
 /*微博流量 1次性 2.6s开始*/
 .flow_weibo{
     opacity: 0;
@@ -165,11 +174,11 @@
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-duration: .6s;
-    -webkit-animation-delay: 1s;
+    -webkit-animation-delay: 5s;
 }
 .circlefocus1{
     opacity: 0;
-    -webkit-animation-delay: 0s;
+    -webkit-animation-delay: 5s;
     -webkit-animation-name: peopleshow;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
@@ -182,11 +191,11 @@
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-duration: .6s;
-    -webkit-animation-delay: 8s;
+    -webkit-animation-delay: 10s;
 }
 .circlefocus2{
     opacity: 0;
-    -webkit-animation-delay: 8s;
+    -webkit-animation-delay: 10s;
     -webkit-animation-name: peopleshow;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
@@ -199,17 +208,16 @@
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-duration: .6s;
-    -webkit-animation-delay: 16s;
+    -webkit-animation-delay: 15s;
 }
 .circlefocus3{
     opacity: 0;
-    -webkit-animation-delay: 16s;
+    -webkit-animation-delay: 15s;
     -webkit-animation-name: peopleshow;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
 }
-
 @-webkit-keyframes peopleshow {
     0% {opacity: 0;}
     10%{opacity: 0;}
@@ -218,6 +226,53 @@
     55%{opacity: .8;}
     60% {opacity: 0;}
     100% {opacity: 0;}
+}
+
+
+.peoplefocus2{
+    opacity: 0;
+    -webkit-animation-name: entertrans;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 4s;
+}
+.peoplefocus3{
+    opacity: 0;
+    -webkit-animation-name: entertrans;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 4.3s;
+}
+.peoplefocus4{
+    opacity: 0;
+    -webkit-animation-name: entertrans;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 5.4s;
+}
+.peoplefocus6{
+    opacity: 0;
+    -webkit-animation-name: entertrans;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 5s;
+}
+.peoplefocus8{
+    opacity: 0;
+    -webkit-animation-name: entertrans;
+    -webkit-animation-fill-mode:forwards;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-delay: 4.6s;
 }
 /*wave 1次性 4s开始*/
 .wave{
