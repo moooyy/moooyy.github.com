@@ -79,3 +79,19 @@ radar.peopleshow = function (option) {
     $("#" + option).fadeIn(1000);
     radar.peopleshow_current = option;
 }
+radar.direct = function (e) {
+    if(e){
+        var target = e.newURL.split("#")[1];
+    }else{
+        var target = location.hash.split("#")[1];
+    }
+    $.get(target + ".html", function( data ) {
+        $("#content").html(data);
+        if(target === "delivery"){
+            radar.initForm();
+        }
+    });
+    $("#"+target).parent().addClass("selected");
+    var other = target == "delivery" ? "home" : "delivery";
+    $("#"+other).parent().removeClass("selected");
+}

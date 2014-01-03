@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>龙渊</title>
         <link rel="stylesheet" type="text/css" href="./release/css/main.css" />
         <link rel="stylesheet" type="text/css" href="./release/css/animation.css" />
         <link rel="stylesheet" type="text/css" href="./release/css/retina.css"/>
@@ -19,8 +20,8 @@
                 </div>
                 <div class="topmenu">
                     <ul>
-                        <li class="selected"><a href="javascript:void(0);" id="home">首页</a></li>
-                        <li><a href="javascript:void(0)" id="delivery">投放方案</a></li>
+                        <li class="selected"><a href="#home" id="home">首页</a></li>
+                        <li><a href="#delivery" id="delivery">投放方案</a></li>
                     </ul>
                 </div>
             </div>
@@ -194,17 +195,21 @@
                 document.getElementById("dragoneye").className = "";
             }, 600)
         }
-        $("#delivery").click(function () {
-            $.get("delivery.html", function( data ) {
-                $("#content").html(data);
-                radar.initForm();
-            });
-        });
-        $("#home").click(function () {
-            $.get("home.html", function( data ) {
-                $("#content").html(data);
-            });
-        })
+        // $("#delivery").click(function () {
+        //     $.get("delivery.html", function( data ) {
+        //         $("#content").html(data);
+        //         radar.initForm();
+        //     });
+        // });
+        // $("#home").click(function () {
+        //     $.get("home.html", function( data ) {
+        //         $("#content").html(data);
+        //     });
+        // })
+        window.onhashchange = function (e) {
+            radar.direct(e);
+        }
+        radar.direct();
     </script>
     </body>
 </html>

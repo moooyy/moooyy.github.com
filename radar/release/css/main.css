@@ -29,6 +29,7 @@ ul,li{list-style: none;}
 .topmenu a:link,.topmenu a:visited{
     color:#333;
     text-decoration: none;
+    outline: none;
 }
 .topmenu li{
     float: left;

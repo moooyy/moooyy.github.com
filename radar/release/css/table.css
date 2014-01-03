@@ -21,13 +21,18 @@ table > tr > td, table > * > tr > td{
     border: none;
     padding: 6px 0px;
     border-top: 1px solid #ddd;
-    color: rgb(181,181,181);
+    color: #aaa;
 }
 #subTable th{
     height: 40px;
 }
 table {
   font-size: 14px;
+}
+.tablearea{
+    display: none;
+    width: 1000px;
+    margin: 0 auto;
 }
 .diffArea {
     border:1px solid #ddd;
@@ -67,7 +72,7 @@ table {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-.axis text{
+#dialog .axis text{
     display: none;
 }
 .line{

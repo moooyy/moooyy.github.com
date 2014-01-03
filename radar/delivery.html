@@ -1,5 +1,4 @@
-<div class="playgroundbg">
-    <div class="playground">
+<div class="formbg">
         <!-- 龙跃 -->
         <div class="calculateform">
             <div class="people_show">
@@ -39,7 +38,7 @@
                             </label>
                         </div>
                         <div class="val">
-                            <input id="money" type="text" name="money" placeholder="预算金额"/>
+                            <input id="money" type="text" name="money" placeholder="预算金额" value="1000000" />
                         </div>
                     </div>
                     <h2>投放时间</h2>
@@ -52,7 +51,7 @@
                             </label>
                         </div>
                         <div class="val">
-                            <input type="text" placeholder="开始时间" id="starttime" name="starttime"/>
+                            <input type="text" placeholder="开始时间" id="starttime" name="starttime" value="2014-02-01" />
                         </div>
                     </div>
                     <div class="pure-control-group">
@@ -63,7 +62,7 @@
                             </label>
                         </div>
                         <div class="val">
-                            <input type="text" placeholder="投放周期" id="period" name="period"/>
+                            <input type="text" placeholder="投放周期" id="period" name="period" value="6"/>
                             天
                         </div>
                     </div>
@@ -117,7 +116,7 @@
                             </label>
                         </div>
                         <div class="val">
-                            <input id="price" name="price" type="text" placeholder="千次展示单价"/>
+                            <input id="price" name="price" type="text" placeholder="千次展示单价" value="100"/>
                             元
                         </div>
                     </div>
@@ -178,8 +177,9 @@
                 </div>
             </form>
         </div>
-
+    </div>
         <!-- 张飞 -->
+    <div class="tablearea" id="tablearea">
         <h2>投放预估</h2>
         <div>
             <table cellpadding=0 cellspacing=0 id='finalTable' style='width:1000px;'></table>
@@ -189,15 +189,14 @@
             <div id='left' style="width:300px;"></div>
             <div id="radarContent" style="width:300px;"></div>
             <div id='right' style="width:300px;"></div>
-            <div id='tips'>
+            <!-- <div id='tips'>
                 <span class='tipContent'>本次投放建议：减少投放时间、加大投放人群</span>
-            </div>
+            </div> -->
         </section>
         <div id="dialog" title="curve图">
             <div id="lineChartContent"></div>
-            <div style="text-align:center;">
+            <!-- <div style="text-align:center;">
                 <span class='tipContent'>本次投放建议：减少投放时间、加大投放人群</span>
-            </div>
+            </div> -->
         </div>
     </div>
-</div>

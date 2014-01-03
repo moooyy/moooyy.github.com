@@ -310,8 +310,8 @@ var d3;
         if (data.length === 0) {
             data.push({
                 money : 0,
-                cycle : 0,
-                frequency : 0,
+                period : 0,
+                frequence : 0,
                 threshold : 0,
                 cpnuv : 0,
                 cpuv : 0,
@@ -409,7 +409,7 @@ var d3;
             });
     }
 
-    function drawRadar (originData) {
+    function drawRadar (originData, indexList) {
         var i,
             len = originData.length,
             ele,
@@ -418,7 +418,7 @@ var d3;
             right = [];
         for (i = -1; ++i < len;) {
             ele = {
-                text: '方案' + i,
+                text: '方案' + indexList[i],
                 color: color(i)
             };
             if (i % 2 === 0) {
@@ -703,9 +703,11 @@ var $;
             }
         },
         {
-            title : '方案序号',
-            width : 72,
-            content : 'index'
+            title : '序号',
+            width : 30,
+            content : function (data, index) {
+                return (index+1);
+            }
         },
         {
             title : '客户名称',
@@ -855,8 +857,11 @@ var $;
             if (typeof fields[i].content === 'string') {
                 row += '<td ' + attr + '>' + (data[fields[i].content] || '') + '</td>';
             } else if (typeof fields[i].content === 'function') {
-                cell = fields[i].content(data, index) || '';
-                if (cell && !/^<td>(.*?)<\/td>$/.test(cell)) {
+                cell = fields[i].content(data, index);
+                if(typeof cell === "undefined" || typeof cell === "null"){
+                    cell = "";
+                }
+                if (!/^<td>(.*?)<\/td>$/.test(cell)) {
                     cell = '<td ' + attr + '>' + cell + '</td>';
                 }
                 row += cell;
@@ -888,6 +893,7 @@ var $;
         if(subTable){
             subTable.innerHTML = generateTable(subFileds, tableData);
         }
+        $("#tablearea").show();
         $('#finalTable input[type=checkbox]').bind('click', checkHandler);
         checkHandler();
         $('a.opener').bind('click', clickHandler);
@@ -898,7 +904,11 @@ var $;
         var index = $(this).attr('index');
         var data = radar.dataSource.get(parseInt(index, 10));
         radar.drawLineChart('#lineChartContent', data[0].curve);
-        $('#dialog').dialog('open');
+        $('#dialog').dialog({
+            modal: true,
+            width: 620,
+            height: 380
+        });
     }
 
     function delHandler () {
@@ -914,7 +924,7 @@ var $;
                 indexList.push($(this).attr('index'));
             });
             var data = radar.dataSource.get(indexList);
-            radar.drawRadar(data);
+            radar.drawRadar(data, indexList);
         }, 500);
     }
 
@@ -947,7 +957,7 @@ var $;
         }
     };
 
-    dataSource.datas = tableData;
+    // dataSource.datas = tableData;
 
     var radar = window.radar = window.radar || {};
     radar.dataSource = radar.dataSource || dataSource;
