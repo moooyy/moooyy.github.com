@@ -193,13 +193,23 @@ function drawLineChart(id, data) {
         .y(function(d) { return yScale(d.number); });
 
     var plans = lineChartSvg.selectAll('.plan').data(simData).enter().append('g').attr('class', 'plan');
+    // function pathTween (d) {
+    //     d = d.values;
+    //     var interpolate = d3.scale.quantile()
+    //         .domain([0,1])
+    //         .range(d3.range(1, d.length + 1));
+    //     return function(t) {
+    //         return line(d.slice(0, interpolate(t)));
+    //     };
+    // }
     function pathTween (d) {
-        d = d.values;
+        //M0,2L3,5C98,34 将每个画线L和弧C 分成一个数组
+        var path = line(d.values).replace(/([CL])/g, '<>$1').split('<>');
         var interpolate = d3.scale.quantile()
             .domain([0,1])
-            .range(d3.range(1, d.length + 1));
-        return function(t) {
-            return line(d.slice(0, interpolate(t)));
+            .range(d3.range(1, path.length + 1));
+        return function (t) {
+           return path.slice(0, interpolate(t)).join();
         };
     }
     plans.append('path').attr('class', 'line')
@@ -208,7 +218,7 @@ function drawLineChart(id, data) {
         .attr('stroke-width', config.strokeWidth + 'px')
         .attr('stroke', function (d) {return config.color(d.name);})
         .transition()
-            // .duration(1000)
+            .duration(1000)
             .attrTween('d', pathTween);
 
     d3.select(id).select('svg').selectAll('.colorline').data(simData).enter()
@@ -238,8 +248,6 @@ function drawLineChart(id, data) {
                 return d.name;
             });
 
-
-    console.debug(plans);
 }
 var radar = window.radar = window.radar || {};
 radar.drawLineChart = radar.drawLineChart || drawLineChart;
@@ -278,8 +286,8 @@ var d3;
 
     var map = {
         money : '金额',
-        cycle : '周期',
-        frequency : '上限',
+        period : '周期',
+        frequence : '上限',
         threshold : '下限',
         cpnuv : 'CPN+UV',
         nuv : 'NUV',
@@ -448,8 +456,8 @@ var $;
             money : 30022222222,
             exposure : 23,
             price : 6,
-            cycle : 6,
-            frequency : 5,
+            period : 6,
+            frequence : 5,
             threshold : 7,
             uv : 8,
             pv : 1234,
@@ -510,8 +518,8 @@ var $;
             money : 30022222,
             exposure : 18,
             price : 6,
-            cycle : 7,
-            frequency : 5,
+            period : 7,
+            frequence : 5,
             threshold : 7,
             uv : 12,
             pv : 1234,
@@ -593,8 +601,8 @@ var $;
             money : 4002222,
             exposure : 28,
             price : 12,
-            cycle : 5,
-            frequency : 8,
+            period : 5,
+            frequence : 8,
             threshold : 9,
             uv : 12,
             pv : 1234,
@@ -672,7 +680,11 @@ var $;
             ]
         }
     ];
-
+    /**
+     * [formatNumber comma函数 ]
+     * @param  {[Number]} number [这种类型数字876922.4334]
+     * @return {[String]}        [876,922.4334]
+     */
     function formatNumber (number) {
         var arr = ('' + number).split('.');
         var str = arr[0].split('').reverse().join('');
@@ -724,14 +736,14 @@ var $;
             title : '周期(天)',
             width : 72,
             content : function (data) {
-                return formatNumber(data.cycle);
+                return formatNumber(data.period);
             }
         },
         {
             title : '目标频次(次)',
             width : 72,
             content : function (data) {
-                return formatNumber(data.frequency);
+                return formatNumber(data.frequence);
             }
         },
         {
@@ -844,7 +856,7 @@ var $;
                 row += '<td ' + attr + '>' + (data[fields[i].content] || '') + '</td>';
             } else if (typeof fields[i].content === 'function') {
                 cell = fields[i].content(data, index) || '';
-                if (!/^<td>(.*?)<\/td>$/.test(cell)) {
+                if (cell && !/^<td>(.*?)<\/td>$/.test(cell)) {
                     cell = '<td ' + attr + '>' + cell + '</td>';
                 }
                 row += cell;
@@ -868,11 +880,14 @@ var $;
     function drawTable (tableData) {
         tableData = tableData || dataSource.get();
         var ft = document.getElementById('finalTable');
-        ft.innerHTML = generateTable(fields, tableData);
+        if(ft){
+            ft.innerHTML = generateTable(fields, tableData);
+        }
 
         var subTable = document.getElementById('subTable');
-        subTable.innerHTML = generateTable(subFileds, tableData);
-
+        if(subTable){
+            subTable.innerHTML = generateTable(subFileds, tableData);
+        }
         $('#finalTable input[type=checkbox]').bind('click', checkHandler);
         checkHandler();
         $('a.opener').bind('click', clickHandler);
@@ -937,13 +952,12 @@ var $;
     var radar = window.radar = window.radar || {};
     radar.dataSource = radar.dataSource || dataSource;
 
-    drawTable();
+    //drawTable();
 
-    $('#dialog').dialog({
-        autoOpen: false,
-        modal: true,
-        width: 620,
-        height: 380
-    });
-
+    // $('#dialog').dialog({
+    //     autoOpen: false,
+    //     modal: true,
+    //     width: 620,
+    //     height: 380
+    // });
 })();

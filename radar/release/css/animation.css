@@ -106,10 +106,12 @@
 /*公用弹出动画 enter*/
 @-webkit-keyframes enter {
     0% {opacity: 1;-webkit-transform:translate(30px,30px) scale(.1);}
-    40% {opacity: .6;-webkit-transform:scale(1.4);}
+    40% {opacity: .6;-webkit-transform:scale(1.3);}
     70% {opacity: 1;-webkit-transform:scale(.8);}
-    85% {opacity: .8;-webkit-transform:scale(1.2);}
+    85% {opacity: .8;-webkit-transform:scale(1.1);}
     90% {opacity: 1;-webkit-transform:scale(.9);}
+    91% {opacity: 0;-webkit-transform:scale(.9);}
+    92% {opacity: 1;-webkit-transform:scale(.9);}
     100% {opacity: 1;-webkit-transform:scale(1);}
 }
 
@@ -174,11 +176,11 @@
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-duration: .6s;
-    -webkit-animation-delay: 5s;
+    -webkit-animation-delay: 4s;
 }
 .circlefocus1{
     opacity: 0;
-    -webkit-animation-delay: 5s;
+    -webkit-animation-delay: 4s;
     -webkit-animation-name: peopleshow;
     -webkit-animation-duration: 20s;
     -webkit-animation-iteration-count: infinite;
@@ -312,10 +314,10 @@
 }
 @-webkit-keyframes heartbeatwithpause {
     0% {-webkit-transform: scale(1);}
-    5% {-webkit-transform: scale(.9);}
-    10% {-webkit-transform: scale(1.1);}
-    15% {-webkit-transform: scale(.95);}
-    20% {-webkit-transform: scale(1.05);}
+    5% {-webkit-transform: scale(.97);}
+    10% {-webkit-transform: scale(1.03);}
+    15% {-webkit-transform: scale(.99);}
+    20% {-webkit-transform: scale(1.01);}
     25% {-webkit-transform: scale(1);}
     100% {-webkit-transform: scale(1);}
 }

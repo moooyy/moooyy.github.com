@@ -67,6 +67,9 @@ table {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+.axis text{
+    display: none;
+}
 .line{
     transition-duration: 2s;
 }

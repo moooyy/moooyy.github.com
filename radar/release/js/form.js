@@ -1,56 +1,524 @@
-$(document).ready(function () {
-    var
-    province = {
+(function ($) {
+    $.fn.serializeJson = function () {
+        var serializeObj = {};
+        var array = this.serializeArray();
+        var str = this.serialize();
+        $(array).each(function () {
+            if (serializeObj[this.name]) {
+                if ($.isArray(serializeObj[this.name])) {
+                    serializeObj[this.name].push(this.value);
+                } else {
+                    serializeObj[this.name] = [serializeObj[this.name], this.value];
+                }
+            } else {
+                serializeObj[this.name] = this.value;
+            }
+        });
+        return serializeObj;
+    };
+})(jQuery);
+
+radar.initForm = function () {
+    $("#starttime").datepicker({
+        dateFormat: "yy-mm-dd"
+    });
+    var province = {
         name: "provinces",
-        en: [
-            "311000", "315000", "334000", "333000", "332000", "318000", "319000", "303000", "328000", "308000", "330000", "326000",
-            "305000", "323000", "321000", "329000", "320000", "312000", "314000", "313000", "309000", "307000", "306000", "325000", "304000",
-            "331000", "301000", "316000", "317000", "324000", "322000", "310000", "327000", "302000"
-        ],
-        zh: [
-            "黑龙江", "内蒙古", "台湾", "澳门", "香港", "吉林", "辽宁", "重庆", "西藏", "贵州", "云南", "四川",
-            "甘肃", "陕西", "青海", "新疆", "宁夏", "河南", "湖南", "湖北", "海南", "广西", "广东", "上海", "福建",
-            "浙江", "安徽", "江苏", "江西", "山东", "山西", "河北", "天津", "北京"
-        ]
+        en: [{
+            key: "311000",
+            name: "黑龙江"
+        }, {
+            key: "315000",
+            name: "内蒙古"
+        }, {
+            key: "334000",
+            name: "台湾"
+        }, {
+            key: "333000",
+            name: "澳门"
+        }, {
+            key: "332000",
+            name: "香港"
+        }, {
+            key: "318000",
+            name: "吉林"
+        }, {
+            key: "319000",
+            name: "辽宁"
+        }, {
+            key: "303000",
+            name: "重庆"
+        }, {
+            key: "328000",
+            name: "西藏"
+        }, {
+            key: "308000",
+            name: "贵州"
+        }, {
+            key: "330000",
+            name: "云南"
+        }, {
+            key: "326000",
+            name: "四川"
+        }, {
+            key: "305000",
+            name: "甘肃"
+        }, {
+            key: "323000",
+            name: "陕西"
+        }, {
+            key: "321000",
+            name: "青海"
+        }, {
+            key: "329000",
+            name: "新疆"
+        }, {
+            key: "320000",
+            name: "宁夏"
+        }, {
+            key: "312000",
+            name: "河南"
+        }, {
+            key: "314000",
+            name: "湖南"
+        }, {
+            key: "313000",
+            name: "湖北"
+        }, {
+            key: "309000",
+            name: "海南"
+        }, {
+            key: "307000",
+            name: "广西"
+        }, {
+            key: "306000",
+            name: "广东"
+        }, {
+            key: "325000",
+            name: "上海"
+        }, {
+            key: "304000",
+            name: "福建"
+        }, {
+            key: "331000",
+            name: "浙江"
+        }, {
+            key: "301000",
+            name: "安徽"
+        }, {
+            key: "316000",
+            name: "江苏"
+        }, {
+            key: "317000",
+            name: "江西"
+        }, {
+            key: "324000",
+            name: "山东"
+        }, {
+            key: "322000",
+            name: "山西"
+        }, {
+            key: "310000",
+            name: "河北"
+        }, {
+            key: "327000",
+            name: "天津"
+        }, {
+            key: "302000",
+            name: "北京"
+        }]
     },
         town = {
             name: "towns",
-            en: [
-                "335000", "306006", "303000", "306005", "312001", "314001", "318001", "323001", "313001", "316003", "331002", "322001", "310001",
-                "316002", "306002", "319001", "324001", "331003", "307001", "316001", "317001", "305001", "330001", "324001", "301001", "331001",
-                "309001", "331001", "308001", "306001", "304001", "306004", "306003", "326001", "327000", "302000"
-            ],
-            zh: [
-                "其他", "珠海", "重庆", "中山", "郑州", "长沙", "长春", "西安", "武汉", "无锡", "温州", "太原", "石家庄", "苏州", "深圳", "沈阳", "青岛", "宁波", "南宁", "南京",
-                "南昌", "兰州", "昆明", "济南", "合肥", "杭州", "海口", "哈尔滨", "贵阳", "广州", "福州", "佛山", "东莞", "成都", "天津", "北京"
-            ]
+            en: [{
+                key: "335000",
+                name: "其他"
+            }, {
+                key: "306006",
+                name: "珠海"
+            }, {
+                key: "303000",
+                name: "重庆"
+            }, {
+                key: "306005",
+                name: "中山"
+            }, {
+                key: "312001",
+                name: "郑州"
+            }, {
+                key: "314001",
+                name: "长沙"
+            }, {
+                key: "318001",
+                name: "长春"
+            }, {
+                key: "323001",
+                name: "西安"
+            }, {
+                key: "313001",
+                name: "武汉"
+            }, {
+                key: "316003",
+                name: "无锡"
+            }, {
+                key: "331002",
+                name: "温州"
+            }, {
+                key: "322001",
+                name: "太原"
+            }, {
+                key: "310001",
+                name: "石家庄"
+            }, {
+                key: "316002",
+                name: "苏州"
+            }, {
+                key: "306002",
+                name: "深圳"
+            }, {
+                key: "319001",
+                name: "沈阳"
+            }, {
+                key: "324001",
+                name: "青岛"
+            }, {
+                key: "331003",
+                name: "宁波"
+            }, {
+                key: "307001",
+                name: "南宁"
+            }, {
+                key: "316001",
+                name: "南京"
+            }, {
+                key: "317001",
+                name: "南昌"
+            }, {
+                key: "305001",
+                name: "兰州"
+            }, {
+                key: "330001",
+                name: "昆明"
+            }, {
+                key: "324001",
+                name: "济南"
+            }, {
+                key: "331001",
+                name: "哈尔滨"
+            }, {
+                key: "331001",
+                name: "杭州"
+            }, {
+                key: "309001",
+                name: "海口"
+            }, {
+                key: "301001",
+                name: "合肥"
+            }, {
+                key: "308001",
+                name: "贵阳"
+            }, {
+                key: "306001",
+                name: "广州"
+            }, {
+                key: "304001",
+                name: "福州"
+            }, {
+                key: "306004",
+                name: "佛山"
+            }, {
+                key: "306003",
+                name: "东莞"
+            }, {
+                key: "326001",
+                name: "成都"
+            }, {
+                key: "327000",
+                name: "天津"
+            }, {
+                key: "302000",
+                name: "北京"
+            }]
         },
         age = {
-            name: "ages",
-            en: [
-                "606", "605", "604", "603", "602", "601"
-            ],
-            zh: [
-                "41以上", "36-40", "31-35", "26-30", "20-25", "0-20"
-            ]
+            name: "age",
+            en: [{
+                key: "606",
+                name: "41以上"
+            }, {
+                key: "605",
+                name: "36-40"
+            }, {
+                key: "604",
+                name: "31-35"
+            }, {
+                key: "603",
+                name: "26-30"
+            }, {
+                key: "602",
+                name: "20-25"
+            }, {
+                key: "601",
+                name: "0-20"
+            }]
         },
         intrests = {
             name: "intrests",
-            en: [
-                "20001", "20002", "20003", "20004", "20005", "20006", "20107", "20108", "20109", "20210", "20211", "20212", "20213", "20214", "20215", "20216", "20317",
-                "20318", "20319", "20320", "20321", "20322", "20323", "20424", "20425", "20426", "20527", "20528", "20529", "20530", "20631", "20632", "20633", "20634",
-                "20635", "20736", "20737", "20738", "20739", "20740", "20741", "20742", "20743", "20744", "20745", "20846", "20847", "20848", "20849", "20850", "20951",
-                "20952", "20953", "20954", "20955", "20956", "20957", "20958", "20959", "21060", "21061", "21062", "21063", "21064", "21065", "21166", "21167", "21168",
-                "21169", "21270", "21271", "21272", "21273", "21274", "21275", "21376", "21377", "21378", "21379", "21380", "21381"
-            ],
-            zh: [
-                "男装", "女装", "鞋子", "运动服饰", "箱包", "配饰", "美食美酒", "特产", "保健食品", "新房", "租房", "二手房", "旅游地产", "商业地产", "海外地产", "装修家居", "小微型车",
-                "紧凑型车", "中大型车", "豪华", "SUV及其他", "改装车", "配件、车品", "美容美发", "美体", "整形", "钟表", "珠宝", "奢侈品", "收藏", "家电", "笔记本", "平板电脑", "手机",
-                "相机", "篮球", "足球", "高尔夫", "赛车", "棋牌", "网球", "健身", "户外运动", "其他项目", "体育彩票", "国内", "出境", "周边自驾", "机票", "酒店", "电影",
-                "电视", "音乐", "演出", "读书", "游戏", "网络视频", "星座", "追星", "中小学辅导", "考研", "外语", "留学移民", "公务员考试", "工作求职", "家政", "婚嫁", "宠物",
-                "搬家", "股票", "基金", "保险", "黄金", "期货", "其他理财服务", "备孕", "孕期", "新生儿", "婴儿", "幼儿", "学龄前教育"
-            ]
+            en: [{
+                key: "20001",
+                name: "男装"
+            }, {
+                key: "20002",
+                name: "女装"
+            }, {
+                key: "20003",
+                name: "鞋子"
+            }, {
+                key: "20004",
+                name: "运动服饰"
+            }, {
+                key: "20005",
+                name: "箱包"
+            }, {
+                key: "20006",
+                name: "配饰"
+            }, {
+                key: "20107",
+                name: "美食美酒"
+            }, {
+                key: "20108",
+                name: "特产"
+            }, {
+                key: "20109",
+                name: "保健食品"
+            }, {
+                key: "20210",
+                name: "新房"
+            }, {
+                key: "20211",
+                name: "租房"
+            }, {
+                key: "20212",
+                name: "二手房"
+            }, {
+                key: "20213",
+                name: "旅游地产"
+            }, {
+                key: "20214",
+                name: "商业地产"
+            }, {
+                key: "20215",
+                name: "海外地产"
+            }, {
+                key: "20216",
+                name: "装修家居"
+            }, {
+                key: "20317",
+                name: "小微型车"
+            }, {
+                key: "20318",
+                name: "紧凑型车"
+            }, {
+                key: "20319",
+                name: "中大型车"
+            }, {
+                key: "20320",
+                name: "豪华"
+            }, {
+                key: "20321",
+                name: "SUV及其他"
+            }, {
+                key: "20322",
+                name: "改装车"
+            }, {
+                key: "20323",
+                name: "配件、车品"
+            }, {
+                key: "20424",
+                name: "美容美发"
+            }, {
+                key: "20425",
+                name: "美体"
+            }, {
+                key: "20426",
+                name: "整形"
+            }, {
+                key: "20527",
+                name: "钟表"
+            }, {
+                key: "20528",
+                name: "珠宝"
+            }, {
+                key: "20529",
+                name: "奢侈品"
+            }, {
+                key: "20530",
+                name: "收藏"
+            }, {
+                key: "20631",
+                name: "家电"
+            }, {
+                key: "20632",
+                name: "笔记本"
+            }, {
+                key: "20633",
+                name: "平板电脑"
+            }, {
+                key: "20634",
+                name: "手机"
+            }, {
+                key: "20635",
+                name: "相机"
+            }, {
+                key: "20736",
+                name: "篮球"
+            }, {
+                key: "20737",
+                name: "足球"
+            }, {
+                key: "20738",
+                name: "高尔夫"
+            }, {
+                key: "20739",
+                name: "赛车"
+            }, {
+                key: "20740",
+                name: "棋牌"
+            }, {
+                key: "20741",
+                name: "网球"
+            }, {
+                key: "20742",
+                name: "健身"
+            }, {
+                key: "20743",
+                name: "户外运动"
+            }, {
+                key: "20744",
+                name: "其他项目"
+            }, {
+                key: "20745",
+                name: "体育彩票"
+            }, {
+                key: "20846",
+                name: "国内"
+            }, {
+                key: "20847",
+                name: "出境"
+            }, {
+                key: "20848",
+                name: "周边自驾"
+            }, {
+                key: "20849",
+                name: "机票"
+            }, {
+                key: "20850",
+                name: "酒店"
+            }, {
+                key: "20951",
+                name: "电影"
+            }, {
+                key: "20952",
+                name: "电视"
+            }, {
+                key: "20953",
+                name: "音乐"
+            }, {
+                key: "20954",
+                name: "演出"
+            }, {
+                key: "20955",
+                name: "读书"
+            }, {
+                key: "20956",
+                name: "游戏"
+            }, {
+                key: "20957",
+                name: "网络视频"
+            }, {
+                key: "20958",
+                name: "星座"
+            }, {
+                key: "20959",
+                name: "追星"
+            }, {
+                key: "21060",
+                name: "中小学辅导"
+            }, {
+                key: "21061",
+                name: "考研"
+            }, {
+                key: "21062",
+                name: "外语"
+            }, {
+                key: "21063",
+                name: "留学移民"
+            }, {
+                key: "21064",
+                name: "公务员考试"
+            }, {
+                key: "21065",
+                name: "工作求职"
+            }, {
+                key: "21166",
+                name: "家政"
+            }, {
+                key: "21167",
+                name: "婚嫁"
+            }, {
+                key: "21168",
+                name: "宠物"
+            }, {
+                key: "21169",
+                name: "搬家"
+            }, {
+                key: "21270",
+                name: "股票"
+            }, {
+                key: "21271",
+                name: "基金"
+            }, {
+                key: "21272",
+                name: "保险"
+            }, {
+                key: "21273",
+                name: "黄金"
+            }, {
+                key: "21274",
+                name: "期货"
+            }, {
+                key: "21275",
+                name: "其他理财服务"
+            }, {
+                key: "21376",
+                name: "备孕"
+            }, {
+                key: "21377",
+                name: "孕期"
+            }, {
+                key: "21378",
+                name: "新生儿"
+            }, {
+                key: "21379",
+                name: "婴儿"
+            }, {
+                key: "21380",
+                name: "幼儿"
+            }, {
+                key: "21381",
+                name: "学龄前教育"
+            }]
         }, temp = [];
+
+    function showTips(str) {
+        return [
+            '<div class="extends-info">',
+            '<strong>', str, '</strong>',
+            '<span></span>',
+            '</div>'
+        ].join('');
+    }
+
     $('label[for="provinces"]').html(createChecboxs(province));
     $('label[for="towns"]').html(createChecboxs(town));
     $('label[for="age"]').html(createChecboxs(age));
@@ -59,12 +527,11 @@ $(document).ready(function () {
     function createChecboxs(data) {
         var str = "";
         for (var i = data.en.length - 1; i >= 0; i--) {
-            str += '<input type="checkbox" class="' + data.name + '" value="' + data.en[i] + '"/>' + data.zh[i];
+            str += '<label class="lscheck"><input type="checkbox" name="orientation" class="' + data.name + '" value="' + data.en[i].key + '"/> ' + data.en[i].name + '</label>';
         }
         return str;
     }
 
-    $("#starttime").datepicker();
 
     $('input[name="area"]').change(function (event) {
         if ($('.provinces').is(':checked')) {
@@ -85,204 +552,94 @@ $(document).ready(function () {
             $('#provinces').css("display", "none");
         })();
     });
+    $('#price , #crash , #period').keyup(function () {
+        if ($('#price').val() || $('#crash').val() || $('#period').val()) {
+            $('.extends-info').remove();
+        }
+    });
+    $('select').change(function () {
+        if (parseInt($('#frequence').val(), 10) < parseInt($('#threshold').val(), 10)) {
+            $('.extends-info').remove();
+        }
+    });
 
-    $('#extends-form-wrap').submit(function (event) {
+    $("#money").blur(function () {
+        radar.defaultMoney = radar.defaultMoney || parseInt(this.value, 10);
+        if ($('input[name="sex"]:checked').val() == 500) {
+            if (parseInt(this.value, 10) !== radar.lastMoney) {
+                if (parseInt(this.value, 10) > radar.defaultMoney) {
+                    radar.peopleshow_current !== "more" && radar.peopleshow("more");
+                } else if (parseInt(this.value, 10) < radar.defaultMoney) {
+                    radar.peopleshow_current !== "less" && radar.peopleshow("less");
+                } else {
+                    radar.peopleshow_current !== "normal" && radar.peopleshow("normal");
+                }
+            }
+            radar.lastMoney = this.value;
+        }
+    });
+    $("input[name='sex']").each(function (i, el) {
+        $(el).click(function () {
+            switch (this.id) {
+            case "male":
+                radar.peopleshow_current !== "male" && radar.peopleshow("male");
+                break;
+            case "female":
+                radar.peopleshow_current !== "female" && radar.peopleshow("female");
+                break;
+            default:
+                radar.peopleshow_current !== "normal" && radar.peopleshow("normal");
+            }
+        })
+    })
+
+    $('#extends-form-wrap').bind("submit", function (event) {
         event.preventDefault();
-        if (!$('input[name="startDate"]').val()) {
-            $('#start').focus().attr('placeholder', '请选择投放时间');
+        if (!$("#starttime").val()) {
+            $('#starttime').focus();
             return false;
         }
         if (!$.isNumeric($('#price').val())) {
-            $('#price').focus().attr('placeholder', '请填写单价，且请填写数字！');
+            $(showTips("请填写数字!")).insertAfter('#price');
+            $('#price').focus();
             return false;
         }
-        if (!$.isNumeric($('#crash').val()) && !$.isNumeric($('input[name="period"]').val())) {
-            $("<span class='warning'>请至少填写一项!</span>").appendTo('.info');
+        if (!$.isNumeric($('#money').val()) && !$.isNumeric($('#period').val())) {
+            $(showTips("请至少填写一项!")).insertAfter('#money');
+            $(showTips("请至少填写一项!")).insertAfter('#period');
             return false;
         }
         if (parseInt($('#frequence').val(), 10) > parseInt($('#threshold').val(), 10)) {
-            $('<span class="warning">频次阈值大于或等于目标频次</span>').css("margin-left", "2em").appendTo('#frequences-title');
+            $(showTips("频次阈值大于或等于目标频次")).insertAfter('#frequence').css("top", "-20%");
             return false;
         }
         $('#extends-settings input[type="checkbox"]:checked').each(function () {
             temp.push($(this).val());
         });
-
-        $.ajax({
-            url: 'localhost',
-            type: "post",
-            data: {
-                customername: $('#customername').val(), //客户名称
-                money: $('#crash').val(), //预算金额
-                starttime: $('input[name=startDate]').val(), //开始时间
-                period: $('#period').val(), //投放周期
-                frequence: $('#frequence').val(), //目标频次
-                threshold: $('#threshold').val(), //频次阀值
-                price: $('#price').val(), //千次展示价格
-                orientation: temp.join(',') //定向信息
-            },
-            jsonp: true,
-            jsopCallback: "catchdata"
-        }).done(function (data) {
-            if (console && console.log) {
-                console.log("Sample of data:", data.slice(0, 100));
-            }
+        // $.ajax({
+        //   url : 'localhost',
+        //   type: "post",
+        //   data : {
+        //     customername : $('#customername').val(), //客户名称
+        //     money : $('#crash').val(), //预算金额
+        //     starttime : $("#start").val(), //开始时间
+        //     period : $('#period').val(), //投放周期
+        //     frequence : $('#frequence').val(), //目标频次
+        //     threshold : $('#threshold').val(), //频次阀值
+        //     price : $('#price').val(), //千次展示价格
+        //     orientation : temp.join('') //定向信息
+        //   }
+        // }).done(function( data ) {
+        //   if ( console && console.log ) {
+        //     console.log( "Sample of data:", data.slice( 0, 100 ) );
+        //   }
+        // });
+        var params = $("#extends-form-wrap").serializeJson();
+        if (params.orientation) {
+            params.orientation = params.orientation.join();
+        }
+        radar.io.post('http://zhouyi.sina.com.cn/longyuan-radar/formula/run', params, function (data) {
+            radar.dataSource.add(data.result[0]);
         });
-
     });
-});
-var pmps = {
-    inhouse: {},
-    totalnum: 0,
-    boynum: 0,
-    girlnum: 0,
-    focusednum: 0,
-    timeout: 0,
-    playground: document.getElementById("playground"),
-    "people": function () {
-        return this.born();
-    },
-    "gather": function () {
-        return this.init();
-    },
-    "rand": function (min, max) {
-        return Math.floor(min + Math.random() * (max - min + 1));
-    }
-};
-pmps.people.prototype = {
-    "id": 0,
-    "sex": 1, // 0 : girl , 1 : boy ;
-    "born": function () {
-        var newp = document.createElement("div");
-        var This = this;
-        newp.className = "people";
-        newp.id = "pmps" + pmps.totalnum;
-        newp.onclick = function () {
-            //alert(this.id);
-            This.setFocus();
-        }
-        pmps.playground.appendChild(newp);
-        pmps.inhouse[newp.id] = {
-            "target": newp,
-            "self": this
-        }
-        this.id = newp.id;
-        pmps.totalnum++;
-    },
-    "setPos": function (x, y) {
-        var z = y / 300;
-        pmps.inhouse[this.id].target.style.cssText += "top:" + y + "px;left:" + x + "px;z-index:" + y + ";opacity:" + z + ";display:block;";
-    },
-    "setFocus": function () {
-        if (!this.focus) {
-            var newf = document.createElement("div");
-            newf.className = "focus";
-            newf.id = "focus" + this.id;
-            newf.innerHTML = "<div class='rotate'></div>";
-            pmps.playground.appendChild(newf);
-            pmps.inhouse[this.id]["focus"] = newf;
-            var left = pmps.inhouse[this.id].target.style.left.split("px")[0];
-            var top = pmps.inhouse[this.id].target.style.top.split("px")[0];
-            newf.style.cssText = "top:" + top + "px;left:" + left + "px;z-index:" + (top - 1);
-            this.focus = 1;
-            pmps.focusednum++;
-        } else {
-            pmps.playground.removeChild(pmps.inhouse[this.id]["focus"]);
-            delete pmps.inhouse[this.id]["focus"];
-            pmps.focusednum--;
-            this.focus = 0;
-        }
-    },
-    "setSex": function (sex) {
-        if (sex) {
-
-        } else {
-            if (pmps.boynum > pmps.girlnum) {
-                this.setGirl();
-                this.sex = 0;
-                pmps.inhouse[this.id]["sex"] = 0;
-                pmps.girlnum++;
-            } else {
-                this.setBoy();
-                this.sex = 1;
-                pmps.inhouse[this.id]["sex"] = 1;
-                pmps.boynum++;
-            }
-        }
-    },
-    "setBoy": function () {
-        var bglist = ["./release/css/images/man_1.png", "./release/css/images/man_1.png", "./release/css/images/child_1.png"];
-        pmps.inhouse[this.id].target.style.cssText += "background:url('" + bglist[pmps.rand(0, 100) % 3] + "') no-repeat;"
-    },
-    "setGirl": function () {
-        var bglist = ["./release/css/images/woman_1.png", "./release/css/images/woman_1.png", "./release/css/images/child_1.png"];
-        pmps.inhouse[this.id].target.style.cssText += "background:url('" + bglist[pmps.rand(0, 100) % 3] + "') no-repeat;"
-    }
-}
-pmps.gather.prototype = {
-    "width": 500,
-    "height": 450,
-    "setSize": function (w, h) {
-        this.width = w || this.width;
-        this.height = h || this.height;
-    },
-    "add": function (x, y) {
-        var newpeople = new pmps.people();
-        var x = x || pmps.rand(0, this.width);
-        var y = y || pmps.rand(30, this.height);
-        newpeople.setPos(x, y);
-        newpeople.setSex();
-    },
-    "del": function () {
-        var outsex = 0;
-        if (pmps.boynum > pmps.girlnum) {
-            outsex = 1;
-            pmps.boynum--;
-        } else {
-            pmps.girlnum--;
-        }
-        for (var i in pmps.inhouse) {
-            if (pmps.inhouse[i].sex == outsex) {
-                pmps.playground.removeChild(pmps.inhouse[i].target);
-                if (pmps.inhouse[i].focus) {
-                    pmps.inhouse[i].self.setFocus();
-                }
-                pmps.totalnum--;
-                delete pmps.inhouse[i];
-                break;
-            }
-        }
-
-    },
-    "init": function () {
-        var balance = 5;
-        var average = Math.ceil(Math.sqrt(balance));
-        var coord = [];
-        for (var j = 1; j <= average; j++) {
-            for (var i = average; i > 0; i--) {
-                if(j%2){
-                    coord.push({
-                        x: (this.width / average) * i - 30,
-                        y: (this.height / average) * j
-                    });
-                }else{
-                    coord.push({
-                        x: (this.width / average) * i + 30,
-                        y: (this.height / average) * j
-                    });
-                }
-            }
-        }
-        console.log(coord.reverse());
-        // alert(balance);
-        if (balance > 0) {
-            while (balance--) {
-                this.add(coord[balance].x, coord[balance].y);
-            }
-        } else if (balance < 0) {
-            while (balance++) {
-                this.del();
-            }
-        }
-    }
 }

@@ -1,112 +1,120 @@
-.pmps{
-    width: 588px;
-    height: 542px;
-    position: relative;
+.calculateform{
+  width: 1000px;
+  height: 500px;
+  margin: 0 auto;
+  position: relative;
 }
-.square{
-    width: 588px;
-    height: 542px;
-    background: url(images/square.png) no-repeat;
+#extends-form-wrap{
+  position: absolute;
+  top: 22px;
+  right: 0;
+  width:360px;
+  height: 451px;
+  border:2px solid #eee;
+  border-bottom:2px solid #aaa;
+  border-radius: 4px;
+  background:rgba(255,255,255,.95);
 }
-.radarform{
-    width: 360px;
-    height: 500px;
-    position: absolute;
-    right: 0;
-    top: 10px;
-    background:#fff;
+.people_show{
+  width: 500px;
+  height: 456px;
+  padding: 22px 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
-#playground{
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -120px;
-    left: -50px;
+.people_show .normal{
+  width: 494px;
+  height: 455px;
+  position: absolute;
+  background: url(images/people_normal.png) no-repeat;
 }
-.people{
-    width: 74px;
-    height: 179px;
-    position: absolute;
-    opacity: 1;
-    -webkit-animation-duration:1s;
+.people_show .more{
+  width: 494px;
+  height: 455px;
+  background: url(images/people_more.png) no-repeat;
+  position: absolute;
+  display: none;
 }
-@-webkit-keyframes 'wobble' {
-    0% {
-        opacity: .0;
-        -webkit-transform:scale(1.2);
-    }
-    40% {
-        opacity: .6;
-    }
-    60% {
-        opacity: .8;
-    }
-    100% {
-        opacity: 1;
-        -webkit-transform: scale(1);
-    }
+.people_show .less{
+  width: 494px;
+  height: 455px;
+  background: url(images/people_less.png) no-repeat;
+  position: absolute;
+  display: none;
 }
-
-#wrap{margin:.45em .25em;}
-.extends-wrap{width:100%;padding:.65em .05em;border:1px solid #ccc;}
-.extends-background-imgs{list-style: none;position:absolute;}
-.extends-man , .extends-woman , .extends-child{position:absolute;}
-.extends-man{width:44px;height:78px;background:transparent url('../images/me_3.jpeg') no-repeat 0 0;}
-#extends-form-wrap{width:32%;border:2px solid #eee;border-bottom:2px solid #aaa;border-radius: 4px;}
-.extends-form-group{width:100%;height:380px;overflow:scroll;}
+.people_show .male{
+  width: 494px;
+  height: 455px;
+  background: url(images/people_male.png) no-repeat;
+  position: absolute;
+  display: none;
+}
+.people_show .female{
+  width: 494px;
+  height: 455px;
+  background: url(images/people_female.png) no-repeat;
+  position: absolute;
+  display: none;
+}
+.extends-form-group{width:100%;height:360px;overflow:scroll;padding: 15px 0;}
 .pure-form fieldset{overflow:scroll;padding-bottom:2em;}
-.pure-form input[type=text]{width:55%;}
 .pure-form input[type=text]:focus{border-color:#f90;background-color:rgba(255,153,0,0.1);}
-.extends-form-radio{position:relative;}
-.extends-form-radio input[type=radio]{position:absolute;opacity: 0;-webkit-opacity:0;-moz-opacity:0;}
-.extends-form-radio input[type=radio] + label {position:relative;padding: 0 0 0 25px;font-size: 16px;line-height: 16px;width:auto;display:inline;text-align:left;}
-.extends-form-radio input[type=radio] + label:before{content:"";
-   display:block;
-   position:absolute;
-   top:2px;
-   height: 14px;
-   width: 14px;
-   background: white;
-   border: 1px solid gray;
-   box-shadow: inset 0px 0px 0px 2px white;
-   -webkit-box-shadow: inset 0px 0px 0px 2px white;
-   -moz-box-shadow: inset 0px 0px 0px 2px white;
-   -o-box-shadow: inset 0px 0px 0px 2px white;
-   -webkit-border-radius: 8px;
-   -moz-border-radius: 8px;
-   -o-border-radius: 8px;
+.pure-control-group{
+    clear: both;
+    margin: 3px 0 0 0;
+    overflow: hidden;
 }
-.pure-form input[type=radio]:checked + label:before{background-color:#f00;}
-.pure-form-aligned .pure-control-group label{width:30%;}
-.pure-form-aligned .pure-controls {
-margin: 1.5em 0 0 6em;
+.prop{
+    float: left;
+    display: inline;
+    width: 100px;
+    font : 14px/30px Verdana,"宋体";
+    text-align: right;
+    padding: 0 10px;
 }
-.pure-form-aligned .pure-control-group p {
-text-align: left;
-vertical-align: middle;
-margin: 1em 1em 1em 2em;
-font-size: 90%;
-font-weight: bold;
+.val{
+    float: left;
+    display: inline;
+    width: 230px;
+    font : 14px/30px Verdana,"宋体";
+}
+.pure-control-group *{
+    vertical-align: middle;
+}
+.lscheck{
+    width: 110px;
+    margin: 0 0 0 3px;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    word-wrap:no-wrap;
+    white-space: nowrap;
+    word-break: break-all;
+}
+.pure-control-group input[type=text]{
+    width : 170px;
+    height: 14px;
+    padding: 8px 5px;
+    font: 14px/1 Verdana,"宋体";
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.pure-control-group select{
+    width : 182px;
+    height: 30px;
+    font: 14px/1 Verdana,"宋体";
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.extends-form-group h2 {
+    font:600 16px/20px Verdana,"宋体";
+    margin-left: 10px;
 }
 
-.pure-form-aligned .pure-control-group p + label {
-  font-weight: 200;
-}
 
-.pure-control-group select {width:55%;}
-.pure-control-group{margin:.85em 0;}
-
-legend.extends-form-title{text-indent:0.65em;color:#fff;line-height:2;background-color: #f90;font-size:.75em;position:relative;padding:.6em 0;}
-.extends-tips{display:inline-block;font-size: 70%;position:absolute;right:4%;top:10%;}
 .warning{color:#f00;font-weight: bold;}
 .info{color:#09f;font-weight: bold;}
-#legend-info{padding-left:1em;color:#09f;font-weight: bold;}
-#extends-settings{margin-top:2em;padding-left:3.5em;border-top:2px solid #ddd;}
-.extends-column{width:86%;padding:.65em;border:1px solid #ccc;}
-.extends-column input{margin:0.5em;}
-.pure-form .extends_title{margin:1em 0;display:block;}
-.extends_title .extends_title_label{margin-right:.85em;font-size:100%;}
-.extends_title{font-size: 90%;}
-#extends_area{text-align: center;}
+
 #provinces , #towns {display:none;text-align: left;}
-.extends-button-submit{width:90%;padding:1.25em 1em;margin-left:-1em;background-color: #f90;border-radius:4px;}
+.extends-button-submit{width:300px;padding:10px 5px;margin:10px auto;background: #fbbd32;border-radius:4px;border:1px solid #ee9124;display: block;font:16px/1 "Microsoft Yahei";color:#fff;}
