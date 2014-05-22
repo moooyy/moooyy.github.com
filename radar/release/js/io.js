@@ -1,6 +1,7 @@
 var radar = {};
 radar.io = {
     get: function (url, params, onsuccess, onerror) {
+        radar.loading();
         var This = this;
         $.ajax({
             url: url,
@@ -12,6 +13,7 @@ radar.io = {
         });
     },
     post: function (url, params, onsuccess, onerror) {
+        radar.loading();
         var This = this;
         $.ajax({
             url: url,
@@ -25,24 +27,25 @@ radar.io = {
     getProcessHandler: function (onsuccess, onerror) {
         var This = this;
         return function (data) {
+            radar.loading(false);
             switch (data.code) {
             case 0:
                 onsuccess(data.data);
                 break;
-            case 2:
-                This.businessError(onerror, data.statusInfo, data);
-                break;
-            case 1:
-                This.systemError(onerror, data.statusInfo || {}, data);
-                break;
-            case 126:
-                This.gotoIndex(onerror, data.statusInfo || {}, data);
-                break;
-            case 127:
-                This.gotoLogin(onerror, data.statusInfo || {}, data);
-                break;
+            // case 2:
+            //     This.businessError(onerror, data.message, data);
+            //     break;
+            // case 1:
+            //     This.systemError(onerror, data.message || {}, data);
+            //     break;
+            // case 126:
+            //     This.gotoIndex(onerror, data.message || {}, data);
+            //     break;
+            // case 127:
+            //     This.gotoLogin(onerror, data.message || {}, data);
+            //     break;
             default:
-                unknowError(callback);
+                This.unknowError(data);
             }
         }
     },
@@ -65,6 +68,9 @@ radar.io = {
     gotoLogin: function (callback, info, obj) {
         radar.login();
         callback(info, obj);
+    },
+    unknowError: function (data){
+        radar.alert(data.message);
     }
 }
 radar.alert = function (msg) {
@@ -85,13 +91,27 @@ radar.direct = function (e) {
     }else{
         var target = location.hash.split("#")[1];
     }
-    $.get(target + ".html", function( data ) {
-        $("#content").html(data);
-        if(target === "delivery"){
-            radar.initForm();
-        }
-    });
+    if(target){
+        $.get(target + ".html", function( data ) {
+            $("#content").html(data);
+            if(target === "delivery"){
+                radar.initForm();
+            }
+        });
+    }
     $("#"+target).parent().addClass("selected");
     var other = target == "delivery" ? "home" : "delivery";
     $("#"+other).parent().removeClass("selected");
+}
+radar.loading = function (s) {
+    if(s === false){
+        $("#loading").dialog("close")
+    }else{
+        $("#loading").dialog({
+            modal: true,
+            dialogClass: "loading",
+            width: 80,
+            height: 115
+        })
+    }
 }

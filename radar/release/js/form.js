@@ -20,7 +20,8 @@
 
 radar.initForm = function () {
     $("#starttime").datepicker({
-        dateFormat: "yy-mm-dd"
+        dateFormat: "yy-mm-dd",
+	maxDate: "+3m"
     });
     var province = {
         name: "provinces",
@@ -552,13 +553,19 @@ radar.initForm = function () {
             $('#provinces').css("display", "none");
         })();
     });
-    $('#price , #crash , #period').keyup(function () {
-        if ($('#price').val() || $('#crash').val() || $('#period').val()) {
+    $('#money , #price , #crash , #period').keyup(function () {
+	if ($('#price').val() || $('#crash').val() || $('#period').val() || $('#money').val()) {
             $('.extends-info').remove();
         }
+	if (parseInt($('#money').val() , 10) === 0 ) {
+		$(showTips("请填写非零金额!")).insertAfter('#money');
+	}
+	if (parseInt($('#period').val() , 10) === 0) {
+		$(showTips("请填写非零投放周期!")).insertAfter('#period');
+	}
     });
     $('select').change(function () {
-        if (parseInt($('#frequence').val(), 10) < parseInt($('#threshold').val(), 10)) {
+        if (parseInt($('#frequence').val(), 10) <= parseInt($('#threshold').val(), 10)) {
             $('.extends-info').remove();
         }
     });
@@ -604,42 +611,42 @@ radar.initForm = function () {
             $('#price').focus();
             return false;
         }
-        if (!$.isNumeric($('#money').val()) && !$.isNumeric($('#period').val())) {
-            $(showTips("请至少填写一项!")).insertAfter('#money');
-            $(showTips("请至少填写一项!")).insertAfter('#period');
+        if ($('#money').val().length > 9) {
+            $(showTips("投放金额位数超过9位!")).insertAfter('#money');
+            $('#money').focus();
+            return false;
+        }
+        if (!$.isNumeric($('#money').val()) && !$('#period').val()) {
+            $(showTips("请填写金额!")).insertAfter('#money');
+	    //$('#period').val(0);
+            return false;
+        }
+        if (!$.isNumeric($('#period').val()) && !$('#money').val()) {
+            $(showTips("请填写投放周期!")).insertAfter('#period');
+	    //$('#money').val(0);
             return false;
         }
         if (parseInt($('#frequence').val(), 10) > parseInt($('#threshold').val(), 10)) {
-            $(showTips("频次阈值大于或等于目标频次")).insertAfter('#frequence').css("top", "-20%");
+            $(showTips("频次阈值大于或等于目标频次")).insertAfter('#frequence');
             return false;
         }
         $('#extends-settings input[type="checkbox"]:checked').each(function () {
             temp.push($(this).val());
         });
-        // $.ajax({
-        //   url : 'localhost',
-        //   type: "post",
-        //   data : {
-        //     customername : $('#customername').val(), //客户名称
-        //     money : $('#crash').val(), //预算金额
-        //     starttime : $("#start").val(), //开始时间
-        //     period : $('#period').val(), //投放周期
-        //     frequence : $('#frequence').val(), //目标频次
-        //     threshold : $('#threshold').val(), //频次阀值
-        //     price : $('#price').val(), //千次展示价格
-        //     orientation : temp.join('') //定向信息
-        //   }
-        // }).done(function( data ) {
-        //   if ( console && console.log ) {
-        //     console.log( "Sample of data:", data.slice( 0, 100 ) );
-        //   }
-        // });
+
         var params = $("#extends-form-wrap").serializeJson();
+	if (!params.money) {
+		params.money = 0;
+	}
+	if (!params.period) {
+		params.period = 0;
+	}
         if (params.orientation) {
-            params.orientation = params.orientation.join();
+            params.orientation = params.sex + "," + (typeof params.orientation === "object" ?  params.orientation.join() : params.orientation);
         }
-        radar.io.post('http://zhouyi.sina.com.cn/longyuan-radar/formula/run', params, function (data) {
+        radar.io.post('http://longyuan.sina.com.cn/formula/run', params, function (data) {
             radar.dataSource.add(data.result[0]);
+            $("html,body").animate({scrollTop:570}, 500);
         });
     });
 }

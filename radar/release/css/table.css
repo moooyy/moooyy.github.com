@@ -16,12 +16,21 @@ table> tr > th, table > * > tr > th{
     background-color: rgb(245,172,33);
     color: white;
 }
-table > tr > td, table > * > tr > td{
+td{
     height: 21px;
     border: none;
     padding: 6px 0px;
     border-top: 1px solid #ddd;
-    color: #aaa;
+    color: #666;
+}
+td a{
+    text-decoration: none;
+    color: #369;
+}
+h2 {
+    font:600 16px/20px Verdana,"宋体";
+    margin-left: 10px;
+    color: #666;
 }
 #subTable th{
     height: 40px;
@@ -39,6 +48,9 @@ table {
     position:relative;
     padding: 24px;
     height: 360px
+}
+.diffArea text{
+    font: 12px/18px Verdana,"宋体";
 }
 
 #left {

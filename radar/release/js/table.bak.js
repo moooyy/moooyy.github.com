@@ -17,123 +17,123 @@ function drawLineChart(id, data) {
     var height = config.h - config.marginTop - config.marginBottom;
     var marginTop = config.marginTop;
     var marginLeft = config.marginLeft;
-    var simData = [
-        {
-            name: 'NV',
-            values:[
-                {
-                    days: 0,
-                    number: 0
-                },
-                {
-                    days: 1,
-                    number: 2
-                },
-                {
-                    days: 2,
-                    number: 16
-                },
-                {
-                    days: 3,
-                    number: 10
-                },
-                {
-                    days: 4,
-                    number: 8
-                },
-                {
-                    days: 5,
-                    number: 20
-                },
-                {
-                    days: 6,
-                    number: 24
-                },
-                {
-                    days: 7,
-                    number: 26
-                },
-                {
-                    days: 8,
-                    number: 23
-                },
-                {
-                    days: 9,
-                    number: 28
-                },
-                {
-                    days: 10,
-                    number: 32
-                },
-                {
-                    days: 11,
-                    number: 35
-                },
-                {
-                    days: 12,
-                    number: 40
-                }
-            ]
-        },
-        {
-            name: 'PV',
-            values:[
-                {
-                    days: 0,
-                    number: 0
-                },
-                {
-                    days: 1,
-                    number: 3
-                },
-                {
-                    days: 2,
-                    number: 8
-                },
-                {
-                    days: 3,
-                    number: 10
-                },
-                {
-                    days: 4,
-                    number: 12
-                },
-                {
-                    days: 5,
-                    number: 16
-                },
-                {
-                    days: 6,
-                    number: 18
-                },
-                {
-                    days: 7,
-                    number: 21
-                },
-                {
-                    days: 8,
-                    number: 24
-                },
-                {
-                    days: 9,
-                    number: 23
-                },
-                {
-                    days: 10,
-                    number: 30
-                },
-                {
-                    days: 11,
-                    number: 35
-                },
-                {
-                    days: 12,
-                    number: 39
-                }
-            ]
-        }
-    ];
-    simData = data || simData;
+    // var simData = [
+    //     {
+    //         name: 'NV',
+    //         values:[
+    //             {
+    //                 days: 0,
+    //                 number: 0
+    //             },
+    //             {
+    //                 days: 1,
+    //                 number: 2
+    //             },
+    //             {
+    //                 days: 2,
+    //                 number: 16
+    //             },
+    //             {
+    //                 days: 3,
+    //                 number: 10
+    //             },
+    //             {
+    //                 days: 4,
+    //                 number: 8
+    //             },
+    //             {
+    //                 days: 5,
+    //                 number: 20
+    //             },
+    //             {
+    //                 days: 6,
+    //                 number: 24
+    //             },
+    //             {
+    //                 days: 7,
+    //                 number: 26
+    //             },
+    //             {
+    //                 days: 8,
+    //                 number: 23
+    //             },
+    //             {
+    //                 days: 9,
+    //                 number: 28
+    //             },
+    //             {
+    //                 days: 10,
+    //                 number: 32
+    //             },
+    //             {
+    //                 days: 11,
+    //                 number: 35
+    //             },
+    //             {
+    //                 days: 12,
+    //                 number: 40
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         name: 'PV',
+    //         values:[
+    //             {
+    //                 days: 0,
+    //                 number: 0
+    //             },
+    //             {
+    //                 days: 1,
+    //                 number: 3
+    //             },
+    //             {
+    //                 days: 2,
+    //                 number: 8
+    //             },
+    //             {
+    //                 days: 3,
+    //                 number: 10
+    //             },
+    //             {
+    //                 days: 4,
+    //                 number: 12
+    //             },
+    //             {
+    //                 days: 5,
+    //                 number: 16
+    //             },
+    //             {
+    //                 days: 6,
+    //                 number: 18
+    //             },
+    //             {
+    //                 days: 7,
+    //                 number: 21
+    //             },
+    //             {
+    //                 days: 8,
+    //                 number: 24
+    //             },
+    //             {
+    //                 days: 9,
+    //                 number: 23
+    //             },
+    //             {
+    //                 days: 10,
+    //                 number: 30
+    //             },
+    //             {
+    //                 days: 11,
+    //                 number: 35
+    //             },
+    //             {
+    //                 days: 12,
+    //                 number: 39
+    //             }
+    //         ]
+    //     }
+    // ];
+    // simData = data || simData;
     //比例尺 xScale yScale 将数据对应到实际宽度
     var xScale = d3.scale.linear()
         .domain([0, d3.max(simData, function (data) {
@@ -327,17 +327,15 @@ var d3;
                 var scale = d3.scale.linear()
                     .domain([0, d3.max(data, f)])
                     .range([0, 10]);
-                for (var i = 0; i < data.length; i++) {
+                for (var i = data.length - 1; i >= 0; i--) {
                     if (result[i]) {
                         result[i].push({
                             axis: map[name],
-                            originValue: data[i][name],
                             value: scale(data[i][name])
                         });
                     } else {
                         result[i] = [{
                             axis: map[name],
-                            originValue: data[i][name],
                             value: scale(data[i][name])
                         }];
                     }
@@ -388,22 +386,27 @@ var d3;
         var xOffset = 150;
         var marginTop = 60;
         var svg = d3.select(id).append('svg');
-        var g = svg.selectAll('.planDesc').data(data).enter().append('g')
-            .attr('class', 'planDesc')
-            .attr('transform', function (d, i) {
-                return 'translate(' + xOffset + ', ' + (marginTop + i * 50) + ')'
-            });
-        g.append('circle')
+        svg.selectAll('circle').data(data).enter().append('circle')
+            .attr('cy', function (d, i) {
+                return marginTop + i * 50;
+            })
+            .attr('cx', function () {
+                return xOffset;
+            })
             .attr('r', '5')
             .attr('fill', function (d) {
                 return d.color;
             });
-        g.append('text')
+        svg.selectAll('text').data(data).enter().append('text')
             .text(function (d) {
                 return d.text;
             })
-            .attr('x', 10)
-            .attr('y', 5);
+            .attr('x', function () {
+                return xOffset + 10;
+            })
+            .attr('y', function (d, i) {
+                return marginTop + i * 50 + 5;
+            });
     }
 
     function drawRadar (originData, indexList) {
@@ -415,8 +418,7 @@ var d3;
             right = [];
         for (i = -1; ++i < len;) {
             ele = {
-                index: indexList[i],
-                text: '方案' + (parseInt(indexList[i], 10) + 1),
+                text: '方案' + indexList[i],
                 color: color(i)
             };
             if (i % 2 === 0) {
@@ -430,7 +432,7 @@ var d3;
         draw('#left', left);
         d3.select('#right').select('svg').remove();
         draw('#right', right);
-        hoverHandler();
+
         var simData = processing(originData);
         RadarChart.draw("#radarContent", simData, {
             w: 300,
@@ -439,18 +441,6 @@ var d3;
             opacityArea: 0.2,
             maxValue: 15
         });
-    }
-
-    function hoverHandler () {
-        d3.selectAll('.planDesc')
-            .on('mouseover', function (d) {
-                var z = "polygon.radar-chart-serie"+d.index;
-                d3.selectAll("#radarContent polygon").transition(200).style("fill-opacity", 0.1); 
-                d3.selectAll(z).transition(200).style("fill-opacity", .7);
-            })
-            .on('mouseout', function(){
-                d3.selectAll("#radarContent polygon").transition(200).style("fill-opacity", 0.2);
-         });;
     }
 
     var radar = window.radar = window.radar || {};
@@ -770,7 +760,7 @@ var $;
         },
         {
             title : function () {
-                return '<th rowspan="11" style="border:none;width:220px;vertical-align:top;"><div style="overflow-x:scroll;overflow-y:hidden;width:220px;">' +
+                return '<th rowspan="10" style="border:none;width:220px;vertical-align:top;"><div style="overflow:scroll;width:220px;">' +
                     '<table id="subTable" style="border:none;width:576px;"></table></div></th>';
             }
         },
@@ -990,12 +980,12 @@ var $;
         }
     };
 
-    // dataSource.datas = tableData;
+    //dataSource.datas = tableData;
 
     var radar = window.radar = window.radar || {};
     radar.dataSource = radar.dataSource || dataSource;
 
-    // drawTable();
+    //drawTable();
 
     // $('#dialog').dialog({
     //     autoOpen: false,

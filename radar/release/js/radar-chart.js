@@ -4,6 +4,8 @@ var RadarChart = {
      radius: 5,
      w: 600,
      h: 600,
+     marginL: 50,
+     marginT: 40,
      factor: .95,
      factorLegend: 1,
      levels: 3,
@@ -11,7 +13,7 @@ var RadarChart = {
      radians: 2 * Math.PI,
      opacityArea: 0.5,
      color: d3.scale.category10(),
-     fontSize: 10
+     fontSize: 12
     };
     if('undefined' !== typeof options){
       for(var i in options){
@@ -25,7 +27,8 @@ var RadarChart = {
     var total = allAxis.length;
     var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
     d3.select(id).select("svg").remove();
-    var g = d3.select(id).append("svg").attr("width", cfg.w).attr("height", cfg.h).append("g");
+    var g = d3.select(id).append("svg").attr("width", cfg.w + cfg.marginL).attr("height", cfg.h + cfg.marginT).append("g")
+      .attr('transform', 'translate('+ (cfg.marginL/2) +','+ (cfg.marginT/2) +')');
 
     var tooltip;
     function getPosition(i, range, factor, func){
@@ -63,17 +66,18 @@ var RadarChart = {
 
     axis.append("text").attr("class", "legend")
         .text(function(d){return d})
-        .style("font-family", "sans-serif").style("font-size", cfg.fontSize + "px")
+        .style("font-size", cfg.fontSize + "px")
         .style("text-anchor", function(d, i){
           var p = getHorizontalPosition(i, 0.5);
-          return (p < 0.4) ? "start" : ((p > 0.6) ? "end" : "middle");
+          return (p < 0.4) ? "end" : ((p > 0.6) ? "start" : "middle");
         })
         .attr("transform", function(d, i){
           var p = getVerticalPosition(i, cfg.h / 2);
-          return p < cfg.fontSize ? "translate(0, " + (cfg.fontSize - p) + ")" : "";
+          return p < (cfg.h/2) ? "translate(0, " + (-cfg.fontSize)/2 + ")" : "translate(0, " + (cfg.fontSize) + ")";
         })
         .attr("x", function(d, i){return getHorizontalPosition(i, cfg.w / 2, cfg.factorLegend);})
-        .attr("y", function(d, i){return getVerticalPosition(i, cfg.h / 2, cfg.factorLegend);});
+        .attr("y", function(d, i){return getVerticalPosition(i, cfg.h / 2, cfg.factorLegend);})
+        .attr("fill","#999");
 
  
     d.forEach(function(y, x){
@@ -136,7 +140,7 @@ var RadarChart = {
         .on('mouseover', function (d){
                     newX =  parseFloat(d3.select(this).attr('cx')) - 10;
                     newY =  parseFloat(d3.select(this).attr('cy')) - 5;
-                    tooltip.attr('x', newX).attr('y', newY).text(d.value).transition(200).style('opacity', 1);
+                    tooltip.attr('x', newX).attr('y', newY).text(d.originValue).transition(200).style('opacity', 1);
                     z = "polygon."+d3.select(this).attr("class");
                     g.selectAll("polygon").transition(200).style("fill-opacity", 0.1); 
                     g.selectAll(z).transition(200).style("fill-opacity", .7);
