@@ -20,6 +20,16 @@ drag.alignItem = function (item, x, y) {
     })
 }
 drag.drop = function (item) {
+    var dropAnimation = $('<img src="./css/images/drop.gif?'+ Math.random() +'" width=100 />');
+    dropAnimation.css({
+        position: "absolute",
+        top: $(item).offset().top - 50,
+        left: $(item).offset().left - 50
+    });
+    $("body").append(dropAnimation);
+    setTimeout(function () {
+        dropAnimation.remove();
+    }, 300)
     item.remove();
     window.dragItem = null;
     drag.setdata(item, parent, {"method": "delete"});
