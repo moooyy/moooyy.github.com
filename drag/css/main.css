@@ -16,6 +16,12 @@ img{border:none;}
     top: 75px;
     width: 300px;
 }
+#selected{
+    position:fixed;
+    left: 20px;
+    top: 230px;
+    width: 300px;
+}
 #tools ul{
     width: 290px;
     margin: 0 auto;
@@ -54,4 +60,61 @@ img{border:none;}
 #realcontent{
     width: 300px;
     height: 512px;
+}
+
+#selected .panel-heading{
+    position: relative;
+}
+.history{
+    position: absolute;
+    width: 42px;
+    height: 20px;
+    right: 12px;
+    top: 10px;
+}
+.history_back{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccc;
+    font: 600 12px/18px Verdana;
+    text-align: center;
+    background:#eee;
+    color:#666;
+}
+.history_back:hover{
+    background:#cef;
+    color:#047;
+    cursor: pointer;
+}
+.history_forward{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccc;
+    font: 600 12px/18px Verdana;
+    text-align: center;
+    background:#eee;
+    color:#666;
+}
+.history_forward:hover{
+    background:#cef;
+    color:#047;
+    cursor: pointer;
+}
+.oplist li{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+}
+.oplist li:hover{
+    background:#cef;
+}
+.returnthis{
+    float: right;
+    margin: 6px 10px 0 0;
 }

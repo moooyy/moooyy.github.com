@@ -42,6 +42,19 @@
                 </div>
             </div>
         </div>
+        <div id="selected">
+            <div class="panel panel-default">
+                <div class="panel-heading">操作结果 <div class="history"><div class="history_back">&lt;</div><div class="history_forward">&gt;</div></div></div>
+                <div class="panel-body">
+                    <ul class="oplist">
+                        <!-- <li><div class="btn btn-xs btn-info">按钮[id:1]</div> 新增</li>
+                        <li><div class="btn btn-xs btn-info">按钮[id:1]</div> 删除</li>
+                        <li><div class="btn btn-xs btn-info">按钮[id:2]</div> 新增 <span class="glyphicon glyphicon-camera returnthis"></span></li>
+                        <li><div class="btn btn-xs btn-info">按钮[id:2]</div> 增加链接</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div id="frameholder">
             
         </div>
@@ -56,6 +69,7 @@
     <script type="text/javascript" src="./js/drag.js"></script>
     <script type="text/javascript" src="./js/widget.js"></script>
     <script>
+        drag.init();
         $(document).mousedown(function (event) {
             event.preventDefault();
             var type = $(event.target).parent(".dragable") ? $(event.target).parent(".dragable").attr("data-type") : "" ;
@@ -87,7 +101,7 @@
                     drag.insert(this.dragitem);
                 }else{
                     this.dragitem.css("opacity", ".3");
-                    drag.drop(this.dragitem);
+                    drag.drop(this.dragitem, window.occupy);
                 }
                 this.dragitem = null;
             }

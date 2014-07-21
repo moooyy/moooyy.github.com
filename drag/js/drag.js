@@ -22,6 +22,7 @@ drag.alignItem = function (item, x, y) {
 drag.drop = function (item) {
     item.remove();
     window.dragItem = null;
+    drag.setdata(item, parent, {"method": "delete"});
 }
 drag.occupy = function (x, y, w, h, autofill) {
     drag.initExist();
@@ -49,6 +50,7 @@ drag.occupy = function (x, y, w, h, autofill) {
             for(var i = 0, il = existTops.length; i < il; i++){
                 if(y < existTops[i]){
                     occupy.insertBefore($("#frameholder>div").eq(i));
+                    window.occupyIndex = i;
                     return false;
                 }
             }
@@ -61,12 +63,28 @@ drag.occupy = function (x, y, w, h, autofill) {
         }
     }
 }
-drag.insert = function (item) {
-    item.css("position","static");
-    item.addClass("btn-block");
-    $("#occupy").replaceWith(item);
-    window.occupy = null;
-    drag.config(item);
+drag.insert = function (item, bySys) {
+    var parentNode;
+    if(bySys){
+        item.addClass("btn-block");
+        $("#frameholder").append(item);
+    }else{
+        item.css("position","static");
+        item.addClass("btn-block");
+        if($("#occupy").parents(".moveable").attr("data-type")){
+            parent = $("#occupy").parents(".moveable").attr("data-type");
+        }
+        $("#occupy").replaceWith(item);
+        drag.config(item);
+        if($(item).attr("data-id")){
+            drag.setdata(item, parent, {"method": "move"});    
+        }else{
+            drag.setdata(item, parent, {"method": "add"});
+            $(item).attr("data-id", (+new Date()).toString(36));
+        }
+        window.occupy = null;
+        window.occupyIndex = null;
+    }
 }
 drag.config = function (item) {
     var configs = widgetConfig[item.attr("data-type")]["config"];
@@ -88,6 +106,20 @@ drag.repick = function (item) {
     drag.occupy(event.pageX, event.pageY, 100,30,true);
     $("body").append(item);
 }
+drag.setdata = function (item, _this, option) {
+    if(!_this){
+        _this = finalData;
+    }
+    // console.log(item.attr("data-type") +":"+ option.method);
+    var idstr = $(item).attr("data-id") ? '[id : '+ $(item).attr("data-id") +']' : '';
+    $("#selected ul").append($('<li><div class="btn btn-xs btn-info">'+ item.attr("data-type") +'</div> '+ idstr + ' ' + option.method +'</li>'));
+
+    for(var i = 0, il = finalData.length; i < il; i++){
+        if($(item).attr("data-id") == finalData[i].id){
+            finalData[i].data = ""
+        }
+    }
+}
 drag.isIn = function (parentItem, x, y) {
     var areaL = parentItem.offset().left;
     var areaR = areaL + parentItem.innerWidth();
@@ -101,5 +133,11 @@ drag.isIn = function (parentItem, x, y) {
         return true;
     }else{
         return false;
+    }
+}
+drag.init = function () {
+    for(var i = 0, il = finalData.length; i < il; i++){
+        var items = drag.create(finalData[i].type);
+        drag.insert(items, true);
     }
 }
