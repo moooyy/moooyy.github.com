@@ -5,9 +5,15 @@
     ul,li{list-style: none;}
     img{border:none;}
     a{text-decoration: none;}
+    .pageBG{
+        width: 100%;
+        height: 320px;
+        background: #d10b1b url(pagebg.jpg) center top no-repeat;
+    }
     .zhuanpanBG{
         width: 320px;
         height: 320px;
+        margin: 0 auto;
         background: url(circle-s.png) 0 0 no-repeat;
         position: relative;
     }
@@ -64,18 +70,20 @@
         cursor: pointer;
     }
 </style>
-<div class="nav" id="dazhuanpan">
-    <div class="zhuanpanBG" id="bglight">
-        <ul class="zhuanpan" id="circleboard">
-            <li><span>下次再来</span></li>
-            <li><span>一等奖</span></li>
-            <li><span>不要灰心</span></li>
-            <li><span>二等奖</span></li>
-            <li><span>感谢参加</span></li>
-            <li><span>三等奖</span></li>
-            <div class="shadow"></div>
-        </ul>
-        <div class="startBtn" id="startBtn"></div>
+<div class="" id="dazhuanpan">
+    <div class="pageBG">
+        <div class="zhuanpanBG" id="bglight">
+            <ul class="zhuanpan" id="circleboard">
+                <li><span>下次再来</span></li>
+                <li><span>一等奖</span></li>
+                <li><span>不要灰心</span></li>
+                <li><span>二等奖</span></li>
+                <li><span>感谢参加</span></li>
+                <li><span>三等奖</span></li>
+                <div class="shadow"></div>
+            </ul>
+            <div class="startBtn" id="startBtn"></div>
+        </div>
     </div>
 </div>
 <!-- 公共库 -->    
