@@ -6,19 +6,19 @@
     img{border:none;}
     a{text-decoration: none;}
     .zhuanpanBG{
-        width: 520px;
-        height: 520px;
-        background: url(circle.png) 0 0 no-repeat;
+        width: 320px;
+        height: 320px;
+        background: url(circle-s.png) 0 0 no-repeat;
         position: relative;
     }
     .zhuanpan{
-        width: 418px;
-        height: 418px;
+        width: 258px;
+        height: 258px;
         position: absolute;
         overflow: hidden;
         border-radius: 50%;
-        left: 51px;
-        top: 49px;
+        left: 31px;
+        top: 31px;
         -webkit-transition-duration: 5s;
         /*opacity: .5;*/
     }
@@ -48,8 +48,8 @@
         width: 180px;
         height: 180px;
         position: absolute;
-        top: 119px;
-        left: 119px;
+        top: 39px;
+        left: 39px;
         background: #e83b0d;
         border-radius: 50%;
     }
@@ -59,8 +59,8 @@
         background: url(button.png);
         position: absolute;
         z-index: 100;
-        left: 183px;
-        top: 125px;
+        left: 82px;
+        top: 28px;
         cursor: pointer;
     }
 </style>
@@ -88,7 +88,7 @@ function bglight (status) {
         clearInterval(rotateStatus);
         rotateStatus = setInterval(function () {
             i < 3 ? i++ : i = 0;
-            var bgheight = -520*i+"px";
+            var bgheight = -320*i+"px";
             $("#bglight").css("background-position","0 "+ bgheight);
         }, 50);
         setTimeout(bglight, timedur);
