@@ -84,6 +84,37 @@
         cursor: pointer;
         opacity: .9
     }
+    .startTime{
+        background: #ededed;
+        border-bottom: 1px solid #666;
+        height: 80px;
+        padding: 10px 0;
+        text-align: center;
+        font: 18px/40px Verdana,"微软雅黑","Microsoft Yahei";
+    }
+    .description{
+        background: #fff;
+        margin: 0 auto;
+    }
+    .description h3{
+        font: 20px/30px Verdana,"微软雅黑","Microsoft Yahei";
+        padding: 0 20px;
+        margin:20px 0 0 0;
+    }
+    .description p{
+        font: 14px/24px Verdana,"宋体";
+        padding: 0 20px;
+        margin: 10px 0 0 0;
+        color: #999;
+    }
+    .description .divideline{
+        margin:0 auto;
+        width: 90%;
+        border-bottom:1px solid #eee;
+        height:20px;
+        line-height: 0;
+        overflow: hidden;
+    }
 </style>
 <div class="" id="dazhuanpan">
     <div class="pageBG">
@@ -106,6 +137,18 @@
         <p>距2014年10月10日开始还有</p>
         <p>10 天 15 时 09 分</p>
     </div>
+    <div class="description">
+        <h3>活动时间</h3>
+        <p>2014.10.08-17:00至2014.10.16-17:00</p>
+        <div class="divideline"></div>
+        <h3>奖项设置</h3>
+        <p>一等奖：iPhone 5s*10台</p>
+        <p>二等奖：苹果键盘*20台</p>
+        <p>三等奖：专卖店T桖杉*100件</p>
+        <div class="divideline"></div>
+        <h3>活动说明</h3>
+        <p>说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字说明文字</p>
+    </div>
 </div>
 <!-- 公共库 -->    
 <script src="http://cdn.bootcss.com/zepto/1.1.4/zepto.js"></script>
@@ -119,7 +162,7 @@ function bglight (status) {
             i < 3 ? i++ : i = 0;
             var bgheight = -320*i+"px";
             $("#bglight").css("background-position","0 "+ bgheight);
-        }, 50);
+        }, 200);
         setTimeout(bglight, timedur);
     }else{
         try{
@@ -133,16 +176,16 @@ function rotate (level) {
         rotateDeg = 0;
     switch (level) {
         case 1:
-            rotateDeg = 330 + 360*10;
+            rotateDeg = 30 + 360*10;
         break;
         case 2:
-            rotateDeg = 210  + 360*10;
+            rotateDeg = 270  + 360*10;
         break;
         case 3:
-            rotateDeg = 90  + 360*10;
+            rotateDeg = 150  + 360*10;
         break;
         default:
-            rotateDeg = 30  + 360*10;
+            rotateDeg = 330  + 360*10;
     }
     $("#circleboard").css("-webkit-transform", "rotate("+ rotateDeg +"deg)");
     bglight(1);
