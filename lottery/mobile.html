@@ -7,7 +7,7 @@
     a{text-decoration: none;}
     .pageBG{
         width: 100%;
-        height: 320px;
+        height: 360px;
         background: #d10b1b url(pagebg.jpg) center top no-repeat;
     }
     .zhuanpanBG{
@@ -28,7 +28,14 @@
         -webkit-transition-duration: 5s;
         /*opacity: .5;*/
     }
+    .pricelevel{
+        width: 258px;
+        height: 258px;
+        overflow: hidden;
+        background: url(level.png) no-repeat;
+    }
     .zhuanpan li{
+        display: none;
         position: absolute; left:50%; top: 50%; width: 260px; height: 260px;background: #ccc;
         -webkit-transform-origin: 100% 100%;
         -moz-transform-origin: 100% 100%;
@@ -40,6 +47,13 @@
         text-align:center;
 
     }
+    .remainTime{
+        color: #ffc843;
+        text-align: center;
+    }
+    .remainTime span{
+        font: 20px/1 Verdana;
+    }
     .zhuanpan li:nth-child(1){-webkit-transform: rotate(30deg) skew(30deg); background: #df6600;}
     .zhuanpan li:nth-child(2){-webkit-transform: rotate(90deg) skew(30deg); background: #ffe1c8;}
     .zhuanpan li:nth-child(3){-webkit-transform: rotate(150deg) skew(30deg);background: #df6600;}
@@ -50,7 +64,7 @@
     .zhuanpan span{ position: absolute; width:260px;height:260px;text-align:center;-webkit-transform:skew(-30deg) rotate(210deg);color:#333;top:-22%;left:65%;font:18px/1 "Microsoft Yahei"}
 
     .shadow{
-        opacity: .4;
+        opacity: .1;
         width: 180px;
         height: 180px;
         position: absolute;
@@ -60,14 +74,15 @@
         border-radius: 50%;
     }
     .startBtn{
-        width: 151px;
-        height: 208px;
-        background: url(button.png);
+        width: 90px;
+        height: 124px;
+        background: url(button-s.png);
         position: absolute;
         z-index: 100;
-        left: 82px;
-        top: 28px;
+        left: 114px;
+        top: 80px;
         cursor: pointer;
+        opacity: .9
     }
 </style>
 <div class="" id="dazhuanpan">
@@ -81,9 +96,15 @@
                 <li><span>感谢参加</span></li>
                 <li><span>三等奖</span></li>
                 <div class="shadow"></div>
+                <div class="pricelevel"></div>
             </ul>
             <div class="startBtn" id="startBtn"></div>
         </div>
+        <div class="remainTime">你今天还有 <span id="remainTime">3</span> 次抽奖机会</div>
+    </div>
+    <div class="startTime">
+        <p>距2014年10月10日开始还有</p>
+        <p>10 天 15 时 09 分</p>
     </div>
 </div>
 <!-- 公共库 -->    
