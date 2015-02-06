@@ -32,7 +32,7 @@
                 }
             }
             selectDate.push(date);
-            if(shiftKey){
+            if(shiftKey && $("#datepicker").data("begin")){
                 if(date){
                     var range = calRange(date, $("#datepicker").data("begin"));
                     // console.log(range);
