@@ -33,9 +33,11 @@
             }
             selectDate.push(date);
             if(shiftKey){
-                var range = calRange(date, $("#datepicker").data("begin"));
-                // console.log(range);
-                selectDate = selectDate.concat(range);
+                if(date){
+                    var range = calRange(date, $("#datepicker").data("begin"));
+                    // console.log(range);
+                    selectDate = selectDate.concat(range);
+                }
             }else{
                 $("#datepicker").data("begin", date);
             }
