@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="196px" height="271px" viewBox="0 0 196 271" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>海涛蓝</title>
+    <defs>
+        <path d="M300,169 C288.375,169 207,269.840909 207,335.090909 C207,387.290909 248.85,430 300,430 C351.15,430 393,387.290909 393,335.090909 C393,269.840909 311.625,169 300,169 Z" id="path-1"></path>
+        <filter x="-3.8%" y="-2.7%" width="107.5%" height="105.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-202.000000, -164.000000)" fill-rule="nonzero">
+            <g id="海涛蓝">
+                <use fill="#15559A" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use stroke="#FFFFFF" stroke-width="10" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
